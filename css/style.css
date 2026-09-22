@@ -115,7 +115,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 7% !important;
+  padding: 10px 7% !important;
   border: none !important;
   outline: none !important;
   background: linear-gradient(185deg, rgba(10, 25, 20, 0.75) 0%, rgba(10, 25, 20, 0.45) 100%) !important;
@@ -178,7 +178,7 @@ nav a:hover::after{ width:100%; }
   align-items:center;
   width:min(850px,90%);
   margin:0 auto;
-  padding:40px 0;
+  padding:120px 0 40px;
   text-align:center;
 }
 
