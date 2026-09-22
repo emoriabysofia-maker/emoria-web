@@ -1545,3 +1545,26 @@ nav:hover {
   background-color: #376B14 !important;
   color: #FFF !important;
 }
+.product-card:nth-child(1) .badge,
+.badge-alegria {
+  background-color: #FFF063 !important;
+  color: #1A1A1A !important;
+}
+
+.product-card:nth-child(2) .badge,
+.badge-calma {
+  background-color: #86E4FF !important;
+  color: #1A1A1A !important;
+}
+
+.product-card:nth-child(3) .badge,
+.badge-amor {
+  background-color: #BA3732 !important;
+  color: #FFF !important;
+}
+
+.product-card:nth-child(4) .badge,
+.badge-gratitud {
+  background-color: #376B14 !important;
+  color: #FFF !important;
+}
