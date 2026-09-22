@@ -1527,21 +1527,21 @@ nav:hover {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 .badge-alegria {
-  background-color: #E68A00 !important;
-  color: #FFF063 !important;
+  background-color: #FFF063 !important;
+  color: #FFF !important;
 }
 
 .badge-calma {
-  background-color: #4A7C59 !important;
-  color: #86E4FF !important;
+  background-color: #86E4FF !important;
+  color: #FFF !important;
 }
 
 .badge-amor {
-  background-color: #D65A7A !important;
-  color: #BA3732 !important;
+  background-color: #BA3732 !important;
+  color: #FFF !important;
 }
 
 .badge-gratitud {
-  background-color: #8C6D3F !important;
-  color: #376B14 !important;
+  background-color: #376B14 !important;
+  color: #FFF !important;
 }
