@@ -1529,23 +1529,23 @@ nav:hover {
 .card:nth-of-type(1) .badge,
 .badge-alegria {
   background-color: #FFF063 !important;
-  color: #1A1A1A !important;
+  color: #FFF !important;
 }
 
 .card:nth-of-type(2) .badge,
 .badge-calma {
-  background-color: #86E4FF !important;
-  color: #1A1A1A !important;
+  background-color: #7FEEFF !important;
+  color: #FFF !important;
 }
 
 .card:nth-of-type(3) .badge,
 .badge-amor {
-  background-color: #BA3732 !important;
+  background-color: #CC1538 !important;
   color: #FFF !important;
 }
 
 .card:nth-of-type(4) .badge,
 .badge-gratitud {
-  background-color: #376B14 !important;
+  background-color: #3C6B15 !important;
   color: #FFF !important;
 }
