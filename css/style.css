@@ -1448,6 +1448,7 @@ footer{
   .emoria-modal-buttons button {
     width: 100%;
     padding: 0.75rem;
+  }
  header, nav, .navbar, .nav, .header, .top-nav, .nav-container {
   position: fixed !important;
   top: 0 !important;
