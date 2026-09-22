@@ -240,7 +240,7 @@ nav a:hover::after{ width:100%; }
   color:var(--cream);
 }
 
-/* Sentidos con resplandor dorado suave en lugar de linea */
+/* Sentidos con resplandor dorado suave sin lineas */
 .hero-senses {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -249,7 +249,7 @@ nav a:hover::after{ width:100%; }
   margin-top: 45px !important;
 }
 
-.sense-item {
+.sense-item, .hero-pillars span, .pillars span {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -258,9 +258,9 @@ nav a:hover::after{ width:100%; }
   letter-spacing: 0.5px !important;
   padding: 6px 14px !important;
   border: none !important;
+  border-bottom: none !important;
   border-radius: 20px !important;
   background: transparent !important;
-  /* Resplandor ambiental dorado suave */
   box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.35) !important;
   text-shadow: 0 0 12px rgba(212, 175, 55, 0.4) !important;
 }
