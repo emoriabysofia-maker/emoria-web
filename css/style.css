@@ -240,26 +240,26 @@ nav a:hover::after{ width:100%; }
   color:var(--cream);
 }
 
-/* Novedoso estilo de sentidos subrayados */
+/* Novedoso estilo de sentidos subrayados con mas espacio */
 .hero-senses {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 25px;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 32px !important;
+  margin-top: 45px !important;
 }
 
 .sense-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #e0e0e0;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  padding-bottom: 4px;
-  border-bottom: 1.5px solid var(--gold, #d4af37);
-  background: transparent;
-  border-radius: 0;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #e0e0e0 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  padding-bottom: 6px !important;
+  border-bottom: 1.5px solid var(--gold, #d4af37) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
 }
 
 /* PROPÓSITO */
