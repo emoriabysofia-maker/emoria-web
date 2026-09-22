@@ -1,0 +1,1 @@
+Abrir index.html en VS Code y publicar en Netlify, GitHub Pages o Hostinger.
