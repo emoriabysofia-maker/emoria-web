@@ -240,12 +240,12 @@ nav a:hover::after{ width:100%; }
   color:var(--cream);
 }
 
-/* Novedoso estilo de sentidos subrayados con mas espacio */
+/* Sentidos con resplandor dorado suave en lugar de linea */
 .hero-senses {
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
-  gap: 32px !important;
+  gap: 36px !important;
   margin-top: 45px !important;
 }
 
@@ -253,13 +253,16 @@ nav a:hover::after{ width:100%; }
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
-  color: #e0e0e0 !important;
+  color: #f0e6d2 !important;
   font-size: 0.95rem !important;
   letter-spacing: 0.5px !important;
-  padding-bottom: 6px !important;
-  border-bottom: 1.5px solid var(--gold, #d4af37) !important;
+  padding: 6px 14px !important;
+  border: none !important;
+  border-radius: 20px !important;
   background: transparent !important;
-  border-radius: 0 !important;
+  /* Resplandor ambiental dorado suave */
+  box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.35) !important;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.4) !important;
 }
 
 /* PROPÓSITO */
