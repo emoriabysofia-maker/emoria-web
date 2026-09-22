@@ -240,32 +240,53 @@ nav a:hover::after{ width:100%; }
   color:var(--cream);
 }
 
-/* Sentidos en una sola linea con resplandor recto tenue */
-.hero-senses {
-  display: flex !important;
-  flex-wrap: nowrap !important; /* Evita que salten a otra linea */
-  justify-content: center !important;
-  gap: 16px !important; /* Espacio mas ajustado para que quepan perfecto */
-  margin-top: 40px !important;
+/* Contenedor del ticker infinito */
+.senses-ticker-wrapper {
   width: 100% !important;
+  overflow: hidden !important;
+  margin-top: 40px !important;
+  position: relative !important;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent) !important;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent) !important;
 }
 
-.sense-item, .hero-pillars span, .pillars span {
+/* Pista animada que corre horizontalmente */
+.senses-ticker-track {
+  display: flex !important;
+  width: max-content !important;
+  gap: 60px !important;
+  animation: scrollInfinite 22s linear infinite !important;
+}
+
+/* Pausa al pasar el cursor para leer tranquilamente */
+.senses-ticker-wrapper:hover .senses-ticker-track {
+  animation-play-state: paused !important;
+}
+
+/* Estilo sutil y resplandor recto */
+.sense-item {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 8px !important;
   color: #f0e6d2 !important;
-  font-size: 0.82rem !important; /* Tamaño sutilmente ajustado para caber horizontalmente */
+  font-size: 0.9rem !important;
   white-space: nowrap !important;
-  letter-spacing: 0.3px !important;
+  letter-spacing: 0.5px !important;
   padding: 4px 0 !important;
   background: transparent !important;
-  border-radius: 0 !important;
   border: none !important;
-  
-  /* Sombra recta difuminada abajo (resplandor tenue en la base) */
   box-shadow: 0 6px 12px -3px rgba(212, 175, 55, 0.25) !important;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Animacion en bucle continuo */
+@keyframes scrollInfinite {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 /* PROPÓSITO */
