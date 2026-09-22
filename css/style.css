@@ -1527,33 +1527,37 @@ nav:hover {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 .badge-alegria,
-.products-grid > :nth-child(1) .badge,
-.products-container > :nth-child(1) .badge,
-section#productos .card:nth-of-type(1) .badge {
+.product-card:nth-child(1) .badge,
+.product-card:nth-child(1) .product-badge,
+section#productos .product-card:nth-of-type(1) .badge,
+div[class*="grid"] >:nth-child(1) .badge {
   background-color: #FFF187 !important;
   color: #1A1A1A !important;
 }
 
 .badge-calma,
-.products-grid > :nth-child(2) .badge,
-.products-container > :nth-child(2) .badge,
-section#productos .card:nth-of-type(2) .badge {
+.product-card:nth-child(2) .badge,
+.product-card:nth-child(2) .product-badge,
+section#productos .product-card:nth-of-type(2) .badge,
+div[class*="grid"] >:nth-child(2) .badge {
   background-color: #7FEEFF !important;
   color: #1A1A1A !important;
 }
 
 .badge-amor,
-.products-grid > :nth-child(3) .badge,
-.products-container > :nth-child(3) .badge,
-section#productos .card:nth-of-type(3) .badge {
+.product-card:nth-child(3) .badge,
+.product-card:nth-child(3) .product-badge,
+section#productos .product-card:nth-of-type(3) .badge,
+div[class*="grid"] >:nth-child(3) .badge {
   background-color: #CC1538 !important;
   color: #FFF !important;
 }
 
 .badge-gratitud,
-.products-grid > :nth-child(4) .badge,
-.products-container > :nth-child(4) .badge,
-section#productos .card:nth-of-type(4) .badge {
+.product-card:nth-child(4) .badge,
+.product-card:nth-child(4) .product-badge,
+section#productos .product-card:nth-of-type(4) .badge,
+div[class*="grid"] >:nth-child(4) .badge {
   background-color: #3C6B15 !important;
   color: #FFF !important;
 }
