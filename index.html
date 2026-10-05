@@ -157,10 +157,10 @@
     </div>
 
     <div class="purpose-image-wrapper">
-  <video autoplay loop muted playsinline class="purpose-candle-img">
+ <video id="video-vela" autoplay loop muted playsinline class="purpose-candle-img">
     <source src="images/vela-loop.mp4" type="video/mp4">
-  </video>
-</div>
+</video>
+<audio id="audio-experiencia" loop></audio>
 </section>
 
   <!-- NOSOTROS -->
@@ -827,16 +827,114 @@
     document.getElementById('modal-codigo').classList.remove('active');
   }
 
-  function validarCodigoModal() {
-    var codigo = document.getElementById('input-codigo').value.trim();
-    
-    if (codigo === "1111") {
-      cerrarModal();
-      window.open("https://open.spotify.com/playlist/2Kq55XWAKOwr9Fd297EvbN?si=dfcdcb870cb0429f", "_blank");
-    } else {
-      document.getElementById('error-msg').innerText = "Código incorrecto. Intenta de nuevo.";
+  // Base de datos de las experiencias de cada vela
+const experienciasData = {
+    "ALEGRIA": {
+        titulo: "ALEGRÍA",
+        subtitulo: "RITUAL SENSORIAL DE ALEGRÍA",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
+        audioUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/audio_alegria.mp3",
+        notas: {
+            salida: "Verbena Mandarina",
+            corazon: "Fresa Frambuesa",
+            fondo: "Vainilla Dulce"
+        }
+    },
+    "CALMA": {
+        titulo: "CALMA",
+        subtitulo: "RITUAL SENSORIAL DE CALMA",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
+        audioUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/audio_calma.mp3",
+        notas: {
+            salida: "Lavanda Silvestre",
+            corazon: "Manzanilla Dulce",
+            fondo: "Sándalo Suave"
+        }
+    },
+    "GRATITUD": {
+        titulo: "GRATITUD",
+        subtitulo: "RITUAL SENSORIAL DE GRATITUD",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
+        audioUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/audio_gratitud.mp3",
+        notas: {
+            salida: "Jazmín Blanco",
+            corazon: "Rosa Damascena",
+            fondo: "Ámbar Cálido"
+        }
+    },
+    "AMORPROPIO": {
+        titulo: "AMOR PROPIO",
+        subtitulo: "RITUAL SENSORIAL DE AMOR PROPIO",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
+        audioUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/audio_amorpropio.mp3",
+        notas: {
+            salida: "Flor de Azahar",
+            corazon: "Peonía Rosa",
+            fondo: "Almizcle Suave"
+        }
     }
-  }
+};
+
+function validarCodigoModal() {
+    var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
+    
+    var claveMap = {
+        "1111": "ALEGRIA",
+        "ALEGRIA2026": "ALEGRIA",
+        "CALMA2026": "CALMA",
+        "GRATITUD2026": "GRATITUD",
+        "AMORPROPIO2026": "AMORPROPIO"
+    };
+
+    var claveFinal = claveMap[codigoInput] || codigoInput;
+    var datos = experienciasData[claveFinal];
+
+    if (datos) {
+        cerrarModal();
+
+        // 1. Actualizar títulos
+        var badge = document.querySelector('.tag-badge');
+        if (badge) badge.innerText = "🔥 VELA " + datos.titulo;
+        
+        var subtitulo = document.querySelector('#player-screen .subtitle');
+        if (subtitulo) subtitulo.innerText = datos.subtitulo;
+
+        // 1.5. Actualizar notas aromáticas
+        var notaSalida = document.getElementById('nota-salida');
+        if (notaSalida && datos.notas) notaSalida.innerText = datos.notas.salida;
+
+        var notaCorazon = document.getElementById('nota-corazon');
+        if (notaCorazon && datos.notas) notaCorazon.innerText = datos.notas.corazon;
+
+        var notaFondo = document.getElementById('nota-fondo');
+        if (notaFondo && datos.notas) notaFondo.innerText = datos.notas.fondo;
+
+        // 2. Actualizar video
+        var videoElement = document.getElementById('video-vela');
+        if (videoElement) {
+            videoElement.src = datos.videoUrl;
+            videoElement.load();
+            videoElement.play();
+        }
+
+        // 3. Actualizar audio
+        var audioElement = document.getElementById('audio-experiencia');
+        if (audioElement) {
+            audioElement.src = datos.audioUrl;
+            audioElement.load();
+            audioElement.play();
+        }
+
+        // 4. Mostrar reproductor
+        var playerScreen = document.getElementById('player-screen');
+        if (playerScreen) {
+            playerScreen.style.display = 'block';
+            playerScreen.scrollIntoView({ behavior: 'smooth' });
+        }
+    } else {
+        document.getElementById('error-msg').innerText = "Código incorrecto. Intenta de nuevo.";
+    }
+}
 </script>
 <!-- Modal Personalizado EMORIA -->
 <div id="modal-codigo" class="emoria-modal-overlay">
@@ -844,7 +942,7 @@
     <h3>Ingresa tu código</h3>
     <p>Inserta el código de tu vela para empezar a disfrutar:</p>
     
-    <input type="password" id="input-codigo" placeholder="Ej: 1111" />
+   <input type="text" id="input-codigo" class="pin-input" placeholder="Ej: ALEGRIA" autocomplete="off" />
     <p id="error-msg" class="error-text"></p>
     
     <div class="emoria-modal-buttons">
