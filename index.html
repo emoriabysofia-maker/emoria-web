@@ -17,6 +17,58 @@
 
 
   <link rel="stylesheet" href="css/style.css">
+  <style>
+  @media (max-width: 768px) {
+    /* 1. Ocultar scroll horizontal estrictamente */
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    *, *::before, *::after {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* 2. CENTRAR todo el contenedor principal y su contenido */
+    .container, 
+    .hero-content, 
+    .hero, 
+    section, 
+    main, 
+    header, 
+    footer {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    /* 3. Evitar que elementos flex o textos horizontales empujen la pantalla */
+    ul, nav, div[style*="display: flex"], .features, .pills-container {
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+
+    /* 4. Centrar botones adecuadamente */
+    .btn, button, a.btn {
+      width: 100% !important;
+      max-width: 280px !important;
+      margin: 10px auto !important;
+      display: block !important;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -223,7 +275,7 @@
           <span style="background: #FFF187; color: #5C4D00; padding: 6px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; width: fit-content; text-transform: uppercase; letter-spacing: 1px;">Alegría</span>
           <div>
             <strong style="font-size: 1.5rem; display: block; margin-bottom: 6px; color: #fff; font-family: serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Vitalidad</strong>
-            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Cáscara de mandarina · Azahar · Cítricos</p>
+            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Verbena Mandarina · Limoncillo · Fresa Frambuesa</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 700; color: #fff; font-size: 1.1rem;">$25.000</span>
               <button type="button" onclick="abrirExperiencia('alegria')" style="border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.72rem; cursor: pointer; font-weight: 600; letter-spacing: 0.5px;">VER EXPERIENCIA</button>
@@ -239,7 +291,7 @@
           <span style="background: #7FEEFF; color: #004D5A; padding: 6px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; width: fit-content; text-transform: uppercase; letter-spacing: 1px;">Calma</span>
           <div>
             <strong style="font-size: 1.5rem; display: block; margin-bottom: 6px; color: #fff; font-family: serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Serenidad</strong>
-            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Lavanda · Manzanilla · Bergamota</p>
+            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Lavanda · Piedras Marinas · Eucalipto</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 700; color: #fff; font-size: 1.1rem;">$25.000</span>
               <button type="button" onclick="abrirExperiencia('serenidad')" style="border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.72rem; cursor: pointer; font-weight: 600; letter-spacing: 0.5px;">VER EXPERIENCIA</button>
@@ -255,7 +307,7 @@
           <span style="background: #CC1538; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; width: fit-content; text-transform: uppercase; letter-spacing: 1px;">Amor Propio</span>
           <div>
             <strong style="font-size: 1.5rem; display: block; margin-bottom: 6px; color: #fff; font-family: serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Autocuidado</strong>
-            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Rosas · Vainilla · Sándalo</p>
+            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Jazmín · Vainilla Francesa · Fresa Frambuesa</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 700; color: #fff; font-size: 1.1rem;">$25.000</span>
               <button type="button" onclick="abrirExperiencia('amorPropio')" style="border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.72rem; cursor: pointer; font-weight: 600; letter-spacing: 0.5px;">VER EXPERIENCIA</button>
@@ -271,7 +323,7 @@
           <span style="background: #3C6B15; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; width: fit-content; text-transform: uppercase; letter-spacing: 1px;">Gratitud</span>
           <div>
             <strong style="font-size: 1.5rem; display: block; margin-bottom: 6px; color: #fff; font-family: serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Gratitud</strong>
-            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Higo · Miel · Canela</p>
+            <p style="font-size: 0.85rem; color: #e0e0e0; margin: 0 0 16px 0; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Verbena Mandarina · Eucalipto · Sándalo</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 700; color: #fff; font-size: 1.1rem;">$25.000</span>
               <button type="button" onclick="abrirExperiencia('gratitud')" style="border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.72rem; cursor: pointer; font-weight: 600; letter-spacing: 0.5px;">VER EXPERIENCIA</button>
@@ -558,7 +610,7 @@
         titulo: "Vitalidad",
         badge: "INTENCIONALIDAD · ENERGÍA",
         descripcion: "Inspirada en el despertar de la luz matutina. Sus esencias botánicas revitalizan la atmósfera, estimulando la claridad mental y la buena disposición del ánimo.",
-        aroma: "Cáscara de mandarina dulce, azahar y matices cítricos",
+        aroma: "Verbena Mandarina, Limoncillo y Fresa Frambuesa",
         color: "Terracota claro y habano suave",
         textura: "Superficie pulida de acabado mineral",
         luz: "Llama clara y brillante",
@@ -570,7 +622,7 @@
         titulo: "Serenidad",
         badge: "INTENCIONALIDAD · PAUSA",
         descripcion: "Un llamado a silenciar la prisa exterior. Esta pieza habita el espacio ofreciendo una atmósfera templada, pensada para reconectar con el presente.",
-        aroma: "Flor de lavanda, infusión de manzanilla y bergamota",
+        aroma: "Lavanda, Piedras Marinas y Eucalipto",
         color: "Arena de mar y matices crema",
         textura: "Porcelana artesanal de tacto mate",
         luz: "Destello difuso y envolvente",
@@ -582,19 +634,19 @@
         titulo: "Amor Propio",
         badge: "INTENCIONALIDAD · ABRAZO",
         descripcion: "Creada para momentos de refugio e introspección personal. Sus notas dulces y amaderadas envuelven el ambiente en una sensación reconfortante.",
-        aroma: "Pétalos de rosa, vainilla natural y fondo botánico",
+        aroma: "Jazmín, Vainilla Francesa y Fresa Frambuesa",
         color: "Habano profundo y nude cálido",
         textura: "Vidrio ahumado artesanal",
         luz: "Brillo cálido de sombra suave",
         playlist: "Frecuencia «Ritual de Vuelve a Ti»",
         precio: "$25.000 COP",
         imagen: "images/Amor propio2.jpeg"
-      }
+      },
       gratitud: {
   titulo: "Gratitud",
-  badge: "INTENCIONALIDAD · RECONOCER",
+ badge: "INTENCIONALIDAD - RECONOCER",
   descripcion: "Gratitud es el aroma de las cosas buenas que ya están aquí. Dulce, cálida y ligeramente especiada, acompaña esos momentos de cierre en los que reconoces lo que sí funcionó.",
-  aroma: "Higo, miel y canela",
+  aroma: "Verbena Mandarina, Eucalipto y Sándalo",
   color: "Mostaza oliva y beige",
   textura: "Cera con acabado cálido y envolvente",
   luz: "Luz dorada para cerrar el día",
@@ -695,8 +747,8 @@
       titulo: "Vitalidad",
       imagen: "images/Alegria2.jpeg",
       descripcion: "Vitalidad es el aroma de la energía renovada. Cítrica y estimulante, abre espacio para despejar la mente, encender la motivación e impulsar tus proyectos.",
-      aroma: "Cáscara de mandarina, azahar y cítricos",
-      color: "Naranja cálido y terracota",
+      aroma: "Verbena Mandarina, Limoncillo y Fresa Frambuesa",
+      color: "Amarillo cálido y terracota",
       textura: "Cera natural con acabado brillante",
       luz: "Luz vibrante para activar el día",
       sonora: "Playlist «Energía y Enfoque»"
@@ -706,8 +758,8 @@
       titulo: "Serenidad",
       imagen: "images/Calma2.jpeg",
       descripcion: "Serenidad es una pausa consciente. Pensada para desacelerar el ritmo al final de la jornada y crear una atmósfera de tranquilidad absoluta.",
-      aroma: "Lavanda, manzanilla y bergamota",
-      color: "Verde olivo y verde menta",
+      aroma: "Lavanda, Piedras Marinas y Eucalipto",
+      color: "Azul cielo pacífico y brisa marina",
       textura: "Cera suave de toque cremoso",
       luz: "Luz tenue y relajante",
       sonora: "Playlist «Desconexión y Paz»"
@@ -717,7 +769,7 @@
       titulo: "Autocuidado",
       imagen: "images/Amor propio2.jpeg",
       descripcion: "Un abrazo cálido y dulce para reconectar contigo misma. Su fragancia envolvente invita al autocuidado, la paciencia y el amor íntimo.",
-      aroma: "Rosas, vainilla y sándalo",
+      aroma: "Jazmín, Vainilla Francesa y Fresa Frambuesa",
       color: "Rosa cuarzo y crema",
       textura: "Cera con acabado suave y romántico",
       luz: "Luz cálida y acogedora",
@@ -728,8 +780,8 @@
       titulo: "Agradecimiento",
       imagen: "images/Gratitud2.jpeg",
       descripcion: "Gratitud es el aroma de las cosas buenas que ya están aquí. Dulce, cálida y ligeramente especiada, acompaña esos momentos de cierre en los que reconoces lo que sí funcionó.",
-      aroma: "Higo, miel y canela",
-      color: "Mostaza oliva y beige",
+      aroma: "Verbena Mandarina + Eucalipto + Sándalo",
+      color: "Verde olivo y verde menta",
       textura: "Cera con acabado cálido y envolvente",
       luz: "Luz dorada para cerrar el día",
       sonora: "Playlist «Gracias por hoy»"
