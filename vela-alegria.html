@@ -581,7 +581,7 @@ var playlistData = {
             corazon: "Fresa Frambuesa",
             fondo: "Limoncillo"
         },
-        videoUrl: "images/loopvela.mp4",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/alegria.mp3"
     },
     "CALMA": {
@@ -592,7 +592,7 @@ var playlistData = {
             corazon: "Lavanda",
             fondo: "Piedras Marinas"
         },
-        videoUrl: "images/loopvela.mp4",
+       videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/calma.mp3"
     },
     "GRATITUD": {
@@ -603,7 +603,7 @@ var playlistData = {
             corazon: "Verbena Mandarina",
             fondo: "Sándalo"
         },
-        videoUrl: "images/loopvela.mp4",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/gratitud.mp3"
     },
     "AMORPROPIO": {
@@ -614,7 +614,7 @@ var playlistData = {
             corazon: "Jazmín",
             fondo: "Vainilla Francesa"
         },
-        videoUrl: "images/loopvela.mp4",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/amorpropio.mp3"
     }
 };
@@ -668,7 +668,7 @@ window.addEventListener('DOMContentLoaded', function() {
             videoElement.setAttribute('playsinline', '');
 
             var videoSource = videoElement.querySelector('source') || videoElement;
-            videoSource.src = datos.videoUrl || "loopvela.mp4";
+            videoSource.src = datos.videoUrl || "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4";
 
             videoElement.load();
             videoElement.play().catch(function(e) {
