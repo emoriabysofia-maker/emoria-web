@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMORIA — Vela Alegría</title>
+
+  <!-- Fuentes Tipográficas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --emoria-green-dark: #050f0c;
+      --emoria-green-base: #0b1d16;
+      --emoria-card-bg: #141716;
+      --emoria-gold: #e5c158;
+      --emoria-gold-dark: #b89530;
+      --emoria-text-light: #f4f4f0;
+      --emoria-text-muted: #8e9994;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--emoria-green-dark);
+      background: radial-gradient(circle at center, var(--emoria-green-base) 0%, var(--emoria-green-dark) 100%);
+      color: var(--emoria-text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: var(--emoria-card-bg);
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(11, 29, 22, 0.9);
+      border: 1px solid rgba(229, 193, 88, 0.15);
+      text-align: center;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: var(--emoria-text-light);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--emoria-gold);
+      margin-bottom: 24px;
+    }
+
+    .pin-input-group {
+      margin: 24px 0;
+    }
+
+    .pin-input {
+      width: 85%;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(229, 193, 88, 0.3);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 3px;
+      outline: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--emoria-gold) 0%, var(--emoria-gold-dark) 100%);
+      color: #111;
+      border: none;
+      padding: 14px 32px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      opacity: 0.9;
+    }
+
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .candle-media-container {
+      width: 100%;
+      height: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      background: #000;
+    }
+
+    .candle-media-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tag-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(229, 193, 88, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      color: var(--emoria-gold);
+      letter-spacing: 1px;
+    }
+
+    .notes-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .notes-title {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--emoria-gold);
+      margin-bottom: 10px;
+    }
+
+    .notes-grid {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.75rem;
+    }
+
+    .note-item span {
+      display: block;
+      color: var(--emoria-text-muted);
+      font-size: 0.65rem;
+      margin-bottom: 2px;
+    }
+
+    /* Estilos del Reproductor de Audio */
+    .progress-container {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--emoria-gold);
+      border-radius: 2px;
+    }
+
+    .controls-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .btn-icon {
+      background: none;
+      border: none;
+      color: var(--emoria-text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .btn-icon:hover {
+      color: var(--emoria-gold);
+    }
+
+    .btn-play-large {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--emoria-gold);
+      color: #111;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(229, 193, 88, 0.3);
+    }
+
+    .timer-section {
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      color: var(--emoria-text-muted);
+      text-align: left;
+    }
+
+    .timer-display {
+      font-size: 0.9rem;
+      color: var(--emoria-gold);
+      font-weight: 600;
+    }
+
+    .btn-timer {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(229, 193, 88, 0.2);
+      color: var(--emoria-text-light);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+
+    .btn-timer:hover {
+      background: rgba(229, 193, 88, 0.15);
+    }
+
+    .footer-note {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- PANTALLA 1: INGRESO DE PIN -->
+    <div id="pin-screen">
+      <h1 class="brand-title">EMORIA</h1>
+      <p class="subtitle">EXPERIENCIA EXCLUSIVA</p>
+      
+      <p style="font-size: 0.85rem; color: var(--emoria-text-muted); line-height: 1.5; margin-bottom: 10px;">
+        Ingresa el código que se encuentra en la tarjeta de tu vela <strong>Alegría</strong>.
+      </p>
+
+      <div class="pin-input-group">
+        <input type="text" id="pin-input" class="pin-input" placeholder="EJ: ALEGRIA" autocomplete="off" />
+      </div>
+
+      <button onclick="validarPin()" class="btn-gold">DESBLOQUEAR</button>
+      <p id="error-msg" class="error-msg">Código incorrecto. Inténtalo de nuevo.</p>
+    </div>
+
+    <!-- PANTALLA 2: REPRODUCTOR RITUAL -->
+   <div id="player-screen">
+      <p class="subtitle">RITUAL SENSORIAL</p>
+      <h1 class="brand-title">EMORIA</h1>
+
+      <!-- Contenedor del Video de la Vela -->
+     <div class="candle-media-container">
+    <video id="video-vela" autoplay muted playsinline loop preload="auto">
+        <source src="https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4" type="video/mp4" />
+    </video>
+    <div class="tag-badge">🔥 VELA ALEGRÍA</div>
+</div>
+
+      <!-- Notas Aromáticas -->
+      <div class="notes-box">
+        <div class="notes-title">🪔 NOTAS AROMÁTICAS</div>
+        <div class="notes-grid">
+          <div class="note-item"><span>SALIDA</span>Verbena Mandarina</div>
+          <div class="note-item"><span>CORAZÓN</span>Fresa Frambuesa</div>
+          <div class="note-item"><span>FONDO</span>Limoncillo</div>
+        </div>
+      </div>
+
+      <!-- Etiqueta de Audio para la experiencia sensorial -->
+      <audio id="audio-player" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=meditation-ambient-110241.mp3" preload="auto"></audio>
+
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar" onclick="seekAudio(event)">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--emoria-text-muted); margin-top:8px;">
+          <span id="current-time">0:00</span>
+          <span id="total-time">03:45</span>
+        </div>
+      </div>
+
+     <!-- Controles de Reproducción -->
+<div class="controls-row">
+  <button class="btn-icon" id="prev-btn" onclick="prevAudio()" title="Anterior">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="19 20 9 12 19 4 19 20"></polygon>
+      <line x1="5" y1="19" x2="5" y2="5"></line>
+    </svg>
+  </button>
+
+  <button class="btn-icon" id="reset-btn" onclick="resetAudio()" title="Reiniciar">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+      <path d="M3 3v5h5"></path>
+    </svg>
+  </button>
+
+  <button class="btn-play-large" id="play-btn" onclick="togglePlay()" title="Reproducir / Pausar">▶</button>
+
+  <button class="btn-icon" id="like-btn" onclick="toggleLike()" title="Favorito">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+    </svg>
+  </button>
+
+  <button class="btn-icon" id="next-btn" onclick="nextAudio()" title="Siguiente">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="5 4 15 12 5 20 5 4"></polygon>
+      <line x1="19" y1="5" x2="19" y2="19"></line>
+    </svg>
+  </button>
+</div>
+
+<!-- Temporizador para Apagar Vela -->
+<div class="timer-section" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.15);">
+  <div class="timer-label" style="font-size: 0.8rem; color: #a0a0a0; line-height: 1.4; text-align: center; width: 100%;">
+    ¡Cuida tu espacio y tu vela!<br>
+    Nosotros te recordamos cuándo apagarla.
+  </div>
+  
+  <div class="timer-display" id="timer-display" style="font-size: 1.4rem; color: #e5c158; font-weight: 700; margin: 2px 0;">30:00</div>
+
+  <div class="timer-buttons" style="display: flex; flex-direction: row; justify-content: center; gap: 12px; width: 100%;">
+    <button class="btn-timer" onclick="setTimer(30, event)" style="flex: 1; max-width: 80px; padding: 6px 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #fff; font-size: 0.8rem; cursor: pointer;">30m</button>
+    <button class="btn-timer" onclick="setTimer(60, event)" style="flex: 1; max-width: 80px; padding: 6px 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #fff; font-size: 0.8rem; cursor: pointer;">60m</button>
+    <button class="btn-timer" onclick="setTimer(120, event)" style="flex: 1; max-width: 80px; padding: 6px 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #fff; font-size: 0.8rem; cursor: pointer;">120m</button>
+  </div>
+</div>
+  </div>
+
+  <script>
+    const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
+
+    function validarPin() {
+      const pinInput = document.getElementById("pin-input");
+      const errorMsg = document.getElementById("error-msg");
+      
+      if (!pinInput) return;
+      const pin = pinInput.value.trim().toUpperCase();
+
+      if (PINS_VALIDOS.includes(pin)) {
+        localStorage.setItem("acceso_vela_alegria", "concedido");
+        mostrarReproductor();
+      } else {
+        if (errorMsg) errorMsg.style.display = "block";
+      }
+    }
+
+    function mostrarReproductor() {
+      const pinScreen = document.getElementById("pin-screen");
+      const playerScreen = document.getElementById("player-screen");
+      
+      if (pinScreen) pinScreen.style.display = "none";
+      if (playerScreen) playerScreen.style.display = "block";
+      
+      const videoVela = document.getElementById("video-vela");
+      if (videoVela) {
+        videoVela.muted = true;
+        videoVela.play().catch(e => console.log("Info reproduccion video:", e));
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const audio = document.getElementById("audio-player");
+
+      if (audio) {
+        audio.addEventListener("timeupdate", () => {
+          if (!audio.duration) return;
+          const pct = (audio.currentTime / audio.duration) * 100;
+          const progressFill = document.getElementById("progress-fill");
+          const currentTimeEl = document.getElementById("current-time");
+          const totalTimeEl = document.getElementById("total-time");
+
+          if (progressFill) progressFill.style.width = pct + "%";
+          if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+          if (totalTimeEl) totalTimeEl.textContent = formatTime(audio.duration);
+        });
+      }
+
+      if (localStorage.getItem("acceso_vela_alegria") === "concedido") {
+        mostrarReproductor();
+      }
+    });
+
+    function togglePlay() {
+      const audio = document.getElementById("audio-player");
+      const btn = document.getElementById("play-btn");
+      if (!audio) return;
+
+      if (audio.paused) {
+        audio.play().catch(e => console.log("Error de audio:", e));
+        if (btn) btn.textContent = "⏸";
+      } else {
+        audio.pause();
+        if (btn) btn.textContent = "▶";
+      }
+    }
+function prevAudio() {
+  const audio = document.getElementById("audio-player");
+  if (audio) audio.currentTime = 0;
+}
+
+function nextAudio() {
+  const audio = document.getElementById("audio-player");
+  if (audio) audio.currentTime = 0;
+}
+    function resetAudio() {
+      const audio = document.getElementById("audio-player");
+      if (audio) audio.currentTime = 0;
+    }
+
+    function seekAudio(e) {
+      const audio = document.getElementById("audio-player");
+      const bar = document.getElementById("progress-bar");
+      if (!audio || !bar || !audio.duration) return;
+
+      const rect = bar.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = clickX / rect.width;
+      audio.currentTime = pct * audio.duration;
+    }
+
+ function toggleLike() {
+  const likeBtn = document.getElementById("like-btn");
+  if (!likeBtn) return;
+
+  likeBtn.classList.toggle("active");
+  const path = likeBtn.querySelector("path");
+
+  if (likeBtn.classList.contains("active")) {
+    if (path) {
+      path.style.fill = "#FFD700";
+      path.style.stroke = "#FFD700";
+      path.style.strokeWidth = "0px";
+    }
+    likeBtn.style.animation = "latido 1.2s infinite ease-in-out";
+  } else {
+    if (path) {
+      path.style.fill = "none";
+      path.style.stroke = "currentColor";
+      path.style.strokeWidth = "";
+    }
+    likeBtn.style.animation = "none";
+  }
+}
+let timerInterval = null;
+
+function setTimer(minutes, event) {
+  if (timerInterval) clearInterval(timerInterval);
+
+  // Marcar botón activo
+  document.querySelectorAll('.btn-timer').forEach(btn => {
+    btn.classList.remove('active');
+    btn.style.borderColor = "rgba(255, 255, 255, 0.15)";
+    btn.style.background = "rgba(255, 255, 255, 0.08)";
+  });
+  const btnPresionado = event ? (event.currentTarget || event.target) : null;
+  if (btnPresionado) {
+    btnPresionado.classList.add('active');
+    btnPresionado.style.borderColor = "#e5c158";
+    btnPresionado.style.background = "rgba(229, 193, 88, 0.35)";
+  }
+
+  const display = document.getElementById("timer-display");
+  const audio = document.getElementById("audio-player");
+  if (!display) return;
+
+  // Hora exacta en la que debe terminar (no se congela al cambiar de pestaña)
+  const endTime = Date.now() + (minutes * 60 * 1000);
+
+  function updateTimer() {
+    const remainingMs = endTime - Date.now();
+    const remainingSeconds = Math.ceil(remainingMs / 1000);
+
+    if (remainingSeconds <= 0) {
+      clearInterval(timerInterval);
+      display.textContent = "00:00";
+      if (audio) {
+        audio.pause();
+        const playBtn = document.getElementById("play-btn");
+        if (playBtn) playBtn.textContent = "▶";
+      }
+      playAlarmSound();
+    } else {
+      display.textContent = formatTime(remainingSeconds);
+    }
+  }
+
+  updateTimer();
+  timerInterval = setInterval(updateTimer, 500);
+}
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+// Función para emitir una campana sonara suave cuando termina el tiempo
+function playAlarmSound() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+
+  const ctx = new AudioContext();
+
+  function sonarTono(frecuencia, tiempoInicio, duracion) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(frecuencia, ctx.currentTime + tiempoInicio);
+
+    // Volumen constante y claro
+    gain.gain.setValueAtTime(0.6, ctx.currentTime + tiempoInicio);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + tiempoInicio + duracion);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(ctx.currentTime + tiempoInicio);
+    osc.stop(ctx.currentTime + tiempoInicio + duracion);
+  }
+
+  // Secuencia de 3 alertas claras (Do, Mi, Sol en alta frecuencia)
+  sonarTono(659.25, 0, 0.3);    // Nota Mi5
+    sonarTono(783.99, 0.35, 0.3); // Nota Sol5
+    sonarTono(1046.50, 0.7, 0.6); // Nota Do6 (golpe final de aviso)
+}
+
+// === BASE DE DATOS DE PLAYLISTS Y MEDIOS ===
+var playlistData = {
+    "ALEGRIA": {
+        titulo: "ALEGRÍA",
+        subtitulo: "Energía vibrante y positividad para tu día.",
+        notas: {
+            salida: "Verbena Mandarina",
+            corazon: "Fresa Frambuesa",
+            fondo: "Limoncillo"
+        },
+        videoUrl: "images/loopvela.mp4",
+        audioUrl: "https://ejemplo.com/audios/alegria.mp3"
+    },
+    "CALMA": {
+        titulo: "CALMA",
+        subtitulo: "Paz interior, serenidad y relajación profunda.",
+        notas: {
+            salida: "Eucalipto",
+            corazon: "Lavanda",
+            fondo: "Piedras Marinas"
+        },
+        videoUrl: "images/loopvela.mp4",
+        audioUrl: "https://ejemplo.com/audios/calma.mp3"
+    },
+    "GRATITUD": {
+        titulo: "GRATITUD",
+        subtitulo: "Conexión, calidez y apreciación del presente.",
+        notas: {
+            salida: "Eucalipto",
+            corazon: "Verbena Mandarina",
+            fondo: "Sándalo"
+        },
+        videoUrl: "images/loopvela.mp4",
+        audioUrl: "https://ejemplo.com/audios/gratitud.mp3"
+    },
+    "AMORPROPIO": {
+        titulo: "AMOR PROPIO",
+        subtitulo: "Abrazo cálido, autoestima y empoderamiento.",
+        notas: {
+            salida: "Fresa Frambuesa",
+            corazon: "Jazmín",
+            fondo: "Vainilla Francesa"
+        },
+        videoUrl: "images/loopvela.mp4",
+        audioUrl: "https://ejemplo.com/audios/amorpropio.mp3"
+    }
+};
+
+// === LECTOR DE CÓDIGO DINÁMICO DE LA URL ===
+window.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var codigoUrl = urlParams.get('codigo');
+
+    var claveMap = {
+        "ALEGRIA2026": "ALEGRIA",
+        "CALMA2026": "CALMA",
+        "GRATITUD2026": "GRATITUD",
+        "AMORPROPIO2026": "AMORPROPIO"
+    };
+
+    var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
+    var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
+
+    var datos = playlistData[claveFinal];
+
+    if (datos) {
+        // 1. Actualizar Badge y Subtítulo
+        var badge = document.querySelector('.tag-badge');
+        if (badge) badge.innerText = "🔥 VELA " + datos.titulo;
+
+        var subtitulo = document.querySelector('.subtitle');
+        if (subtitulo) subtitulo.innerText = datos.subtitulo;
+
+        // 2. Actualizar Notas Aromáticas buscando por ID o por etiquetas en pantalla
+        var elSalida = document.getElementById('nota-salida');
+        var elCorazon = document.getElementById('nota-corazon');
+        var elFondo = document.getElementById('nota-fondo');
+
+        if (elSalida) elSalida.innerText = datos.notas.salida;
+        if (elCorazon) elCorazon.innerText = datos.notas.corazon;
+        if (elFondo) elFondo.innerText = datos.notas.fondo;
+
+        // Búsqueda alternativa si no hay IDs en el HTML
+        var bloquesNotas = document.querySelectorAll('.notas-aromaticas p, .notas-aromaticas div, .notas-aromaticas span');
+        if (bloquesNotas.length >= 3 && !elSalida) {
+            bloquesNotas[0].innerText = datos.notas.salida;
+            bloquesNotas[1].innerText = datos.notas.corazon;
+            bloquesNotas[2].innerText = datos.notas.fondo;
+        }
+
+        // 3. Reproducir Video (con Muted obligatorio para navegadores)
+        var videoElement = document.getElementById('video-vela');
+        if (videoElement) {
+            videoElement.muted = true;
+            videoElement.setAttribute('playsinline', '');
+
+            var videoSource = videoElement.querySelector('source') || videoElement;
+            videoSource.src = datos.videoUrl || "loopvela.mp4";
+
+            videoElement.load();
+            videoElement.play().catch(function(e) {
+                console.log("Autoplay de video restringido por navegador:", e);
+            });
+        }
+
+        // 4. Cargar Audio
+        var audioElement = document.getElementById('audio-experiencia');
+        if (audioElement) {
+            var audioSource = audioElement.querySelector('source') || audioElement;
+            audioSource.src = datos.audioUrl;
+            audioElement.load();
+        }
+    }
+});
+</script>
+</body>
+</html>

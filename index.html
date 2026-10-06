@@ -605,8 +605,9 @@
 
   <!-- LÓGICA JAVASCRIPT DEL MODAL -->
   <script>
-    const experienciasData = {
-      alegria: {
+// Base de datos para las tarjetas visuales
+const experienciasData = {
+    "alegria": {
         titulo: "Vitalidad",
         badge: "INTENCIONALIDAD · ENERGÍA",
         descripcion: "Inspirada en el despertar de la luz matutina. Sus esencias botánicas revitalizan la atmósfera, estimulando la claridad mental y la buena disposición del ánimo.",
@@ -617,8 +618,8 @@
         playlist: "Frecuencia «Primer Rayo del Sol»",
         precio: "$25.000 COP",
         imagen: "images/Alegria2.jpeg"
-      },
-      serenidad: {
+    },
+    "serenidad": {
         titulo: "Serenidad",
         badge: "INTENCIONALIDAD · PAUSA",
         descripcion: "Un llamado a silenciar la prisa exterior. Esta pieza habita el espacio ofreciendo una atmósfera templada, pensada para reconectar con el presente.",
@@ -629,8 +630,8 @@
         playlist: "Frecuencia «Espacio Interno»",
         precio: "$25.000 COP",
         imagen: "images/Calma2.jpeg"
-      },
-      amor_propio: {
+    },
+    "amor_propio": {
         titulo: "Amor Propio",
         badge: "INTENCIONALIDAD · ABRAZO",
         descripcion: "Creada para momentos de refugio e introspección personal. Sus notas dulces y amaderadas envuelven el ambiente en una sensación reconfortante.",
@@ -641,52 +642,50 @@
         playlist: "Frecuencia «Ritual de Vuelve a Ti»",
         precio: "$25.000 COP",
         imagen: "images/Amor propio2.jpeg"
-      },
-      gratitud: {
-  titulo: "Gratitud",
- badge: "INTENCIONALIDAD - RECONOCER",
-  descripcion: "Gratitud es el aroma de las cosas buenas que ya están aquí. Dulce, cálida y ligeramente especiada, acompaña esos momentos de cierre en los que reconoces lo que sí funcionó.",
-  aroma: "Verbena Mandarina, Eucalipto y Sándalo",
-  color: "Mostaza oliva y beige",
-  textura: "Cera con acabado cálido y envolvente",
-  luz: "Luz dorada para cerrar el día",
-  playlist: "Frecuencia «Gracias por hoy»",
-  precio: "$25.000 COP",
-  imagen: "images/Gratitud2.jpeg"
+    },
+    "gratitud": {
+        titulo: "Gratitud",
+        badge: "INTENCIONALIDAD · RECONOCER",
+        descripcion: "Gratitud es el aroma de las cosas buenas que ya están aquí. Dulce, cálida y ligeramente especiada, acompaña esos momentos de cierre.",
+        aroma: "Verbena Mandarina, Eucalipto y Sándalo",
+        color: "Mostaza oliva y beige",
+        textura: "Cera con acabado cálido y envolvente",
+        luz: "Luz dorada para cerrar el día",
+        playlist: "Frecuencia «Gracias por hoy»",
+        precio: "$25.000 COP",
+        imagen: "images/Gratitud2.jpeg"
+    }
+};
+
+function abrirExperiencia(key) {
+    const data = experienciasData[key];
+    if (!data) return;
+
+    document.getElementById('modal-titulo').innerText = data.titulo;
+    document.getElementById('modal-badge').innerText = data.badge;
+    document.getElementById('modal-descripcion').innerText = data.descripcion;
+    document.getElementById('modal-aroma').innerText = data.aroma;
+    document.getElementById('modal-color').innerText = data.color;
+    document.getElementById('modal-textura').innerText = data.textura;
+    document.getElementById('modal-luz').innerText = data.luz;
+    document.getElementById('modal-playlist').innerText = data.playlist;
+    document.getElementById('modal-precio').innerText = data.precio;
+    document.getElementById('modal-img').src = data.imagen;
+
+    const modal = document.getElementById('modal-experiencia');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
-    };
 
-    function abrirExperiencia(key) {
-      const data = experienciasData[key];
-      if (!data) return;
-
-      document.getElementById('modal-titulo').innerText = data.titulo;
-      document.getElementById('modal-badge').innerText = data.badge;
-      document.getElementById('modal-descripcion').innerText = data.descripcion;
-      document.getElementById('modal-aroma').innerText = data.aroma;
-      document.getElementById('modal-color').innerText = data.color;
-      document.getElementById('modal-textura').innerText = data.textura;
-      document.getElementById('modal-luz').innerText = data.luz;
-      document.getElementById('modal-playlist').innerText = data.playlist;
-      document.getElementById('modal-precio').innerText = data.precio;
-      document.getElementById('modal-img').src = data.imagen;
-
-      const modal = document.getElementById('modal-experiencia');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+function cerrarExperiencia() {
+    const modal = document.getElementById('modal-experiencia');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
-
-    function cerrarExperiencia() {
-      const modal = document.getElementById('modal-experiencia');
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    function cerrarAlHacerClicFuera(event) {
-      if (event.target.id === 'modal-experiencia') {
-        cerrarExperiencia();
-      }
-    }
+}
   </script>
   <!-- CONTENEDOR MODAL DE EXPERIENCIAS ESTILO FICHA (IMAGEN 1) -->
 <div id="modalExperiencia" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
@@ -828,7 +827,7 @@
   }
 
   // Base de datos de las experiencias de cada vela
-const experienciasData = {
+const playlistData = {
     "ALEGRIA": {
         titulo: "ALEGRÍA",
         subtitulo: "RITUAL SENSORIAL DE ALEGRÍA",
@@ -877,9 +876,8 @@ const experienciasData = {
 
 function validarCodigoModal() {
     var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
-    
+
     var claveMap = {
-        "1111": "ALEGRIA",
         "ALEGRIA2026": "ALEGRIA",
         "CALMA2026": "CALMA",
         "GRATITUD2026": "GRATITUD",
@@ -887,54 +885,16 @@ function validarCodigoModal() {
     };
 
     var claveFinal = claveMap[codigoInput] || codigoInput;
-    var datos = experienciasData[claveFinal];
 
-    if (datos) {
+    if (playlistData[claveFinal]) {
         cerrarModal();
-
-        // 1. Actualizar títulos
-        var badge = document.querySelector('.tag-badge');
-        if (badge) badge.innerText = "🔥 VELA " + datos.titulo;
-        
-        var subtitulo = document.querySelector('#player-screen .subtitle');
-        if (subtitulo) subtitulo.innerText = datos.subtitulo;
-
-        // 1.5. Actualizar notas aromáticas
-        var notaSalida = document.getElementById('nota-salida');
-        if (notaSalida && datos.notas) notaSalida.innerText = datos.notas.salida;
-
-        var notaCorazon = document.getElementById('nota-corazon');
-        if (notaCorazon && datos.notas) notaCorazon.innerText = datos.notas.corazon;
-
-        var notaFondo = document.getElementById('nota-fondo');
-        if (notaFondo && datos.notas) notaFondo.innerText = datos.notas.fondo;
-
-        // 2. Actualizar video
-        var videoElement = document.getElementById('video-vela');
-        if (videoElement) {
-            videoElement.src = datos.videoUrl;
-            videoElement.load();
-            videoElement.play();
-        }
-
-        // 3. Actualizar audio
-        var audioElement = document.getElementById('audio-experiencia');
-        if (audioElement) {
-            audioElement.src = datos.audioUrl;
-            audioElement.load();
-            audioElement.play();
-        }
-
-        // 4. Mostrar reproductor
-        var playerScreen = document.getElementById('player-screen');
-        if (playerScreen) {
-            playerScreen.style.display = 'block';
-            playerScreen.scrollIntoView({ behavior: 'smooth' });
-        }
+        window.location.href = "vela-alegria.html?codigo=" + claveFinal;
     } else {
-        document.getElementById('error-msg').innerText = "Código incorrecto. Intenta de nuevo.";
+        var errorMsg = document.getElementById('error-msg');
+        if (errorMsg) errorMsg.innerText = "Código incorrecto. Intenta de nuevo.";
     }
 }
+
 </script>
 <!-- Modal Personalizado EMORIA -->
 <div id="modal-codigo" class="emoria-modal-overlay">
