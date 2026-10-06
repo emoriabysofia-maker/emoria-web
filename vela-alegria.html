@@ -634,17 +634,17 @@ window.addEventListener('DOMContentLoaded', function() {
     var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
     var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
 
-    var datos = playlistData[claveFinal];
+    var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
 
     if (datos) {
         // 1. Actualizar Badge y Subtítulo
         var badge = document.querySelector('.tag-badge');
-        if (badge) badge.innerText = "🔥 VELA " + datos.titulo;
+        if (badge) badge.innerText = " VELA " + datos.titulo;
 
         var subtitulo = document.querySelector('.subtitle');
         if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-        // 2. Actualizar Notas Aromáticas buscando por ID o por etiquetas en pantalla
+        // 2. Actualizar Notas Aromáticas (Búsqueda directa en cajas o por ID)
         var elSalida = document.getElementById('nota-salida');
         var elCorazon = document.getElementById('nota-corazon');
         var elFondo = document.getElementById('nota-fondo');
@@ -653,22 +653,21 @@ window.addEventListener('DOMContentLoaded', function() {
         if (elCorazon) elCorazon.innerText = datos.notas.corazon;
         if (elFondo) elFondo.innerText = datos.notas.fondo;
 
-        // Búsqueda alternativa si no hay IDs en el HTML
-        var bloquesNotas = document.querySelectorAll('.notas-aromaticas p, .notas-aromaticas div, .notas-aromaticas span');
-        if (bloquesNotas.length >= 3 && !elSalida) {
+        var bloquesNotas = document.querySelectorAll('.nota-box p, .notas-aromaticas p');
+        if (bloquesNotas.length >= 3) {
             bloquesNotas[0].innerText = datos.notas.salida;
             bloquesNotas[1].innerText = datos.notas.corazon;
             bloquesNotas[2].innerText = datos.notas.fondo;
         }
 
-        // 3. Reproducir Video (con Muted obligatorio para navegadores)
+        // 3. Reproducir Video
         var videoElement = document.getElementById('video-vela');
         if (videoElement) {
             videoElement.muted = true;
             videoElement.setAttribute('playsinline', '');
 
             var videoSource = videoElement.querySelector('source') || videoElement;
-            videoSource.src = datos.videoUrl || "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4";
+            videoSource.src = datos.videoUrl;
 
             videoElement.load();
             videoElement.play().catch(function(e) {
@@ -678,7 +677,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // 4. Cargar Audio
         var audioElement = document.getElementById('audio-experiencia');
-        if (audioElement) {
+        if (audioElement && datos.audioUrl) {
             var audioSource = audioElement.querySelector('source') || audioElement;
             audioSource.src = datos.audioUrl;
             audioElement.load();
