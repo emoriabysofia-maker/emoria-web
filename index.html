@@ -687,23 +687,46 @@ function cerrarExperiencia() {
     }
 }
 function aplicarTemaSegunURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const codigo = (urlParams.get('codigo') || '').toUpperCase();
+    const urlParams = new URLSearchParams(window.location.search);
+    const codigo = (urlParams.get('codigo') || '').toUpperCase();
 
-        document.body.classList.remove('theme-alegria', 'theme-calma', 'theme-amorpropio', 'theme-gratitud');
+    document.body.classList.remove('theme-alegria', 'theme-calma', 'theme-amorpropio', 'theme-gratitud');
 
-        if (codigo.includes('AMORPROPIO') || codigo.includes('AMOR')) {
-            document.body.classList.add('theme-amorpropio');
-        } else if (codigo.includes('CALMA')) {
-            document.body.classList.add('theme-calma');
-        } else if (codigo.includes('GRATITUD')) {
-            document.body.classList.add('theme-gratitud');
-        } else {
-            document.body.classList.add('theme-alegria');
+    // Buscar la píldora (badge)
+    const badge = document.querySelector('.tag-badge') || document.querySelector('[class*="tag"]') || document.getElementById('modal-badge');
+
+    if (codigo.includes('AMORPROPIO') || codigo.includes('AMOR')) {
+        document.body.classList.add('theme-amorpropio');
+        if (badge) {
+            badge.style.background = 'rgba(196, 69, 112, 0.35)';
+            badge.style.borderColor = 'rgba(232, 110, 151, 0.6)';
+            badge.style.color = '#e86e97';
+        }
+    } else if (codigo.includes('CALMA')) {
+        document.body.classList.add('theme-calma');
+        if (badge) {
+            badge.style.background = 'rgba(91, 105, 199, 0.35)';
+            badge.style.borderColor = 'rgba(123, 136, 238, 0.6)';
+            badge.style.color = '#7b88ee';
+        }
+    } else if (codigo.includes('GRATITUD')) {
+        document.body.classList.add('theme-gratitud');
+        if (badge) {
+            badge.style.background = 'rgba(173, 82, 50, 0.35)';
+            badge.style.borderColor = 'rgba(211, 115, 80, 0.6)';
+            badge.style.color = '#d37350';
+        }
+    } else {
+        document.body.classList.add('theme-alegria');
+        if (badge) {
+            badge.style.background = 'rgba(230, 126, 34, 0.35)';
+            badge.style.borderColor = 'rgba(243, 156, 18, 0.6)';
+            badge.style.color = '#f39c12';
         }
     }
+}
 
-    document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
+document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
   </script>
   <!-- CONTENEDOR MODAL DE EXPERIENCIAS ESTILO FICHA (IMAGEN 1) -->
 <div id="modalExperiencia" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
@@ -832,6 +855,24 @@ function aplicarTemaSegunURL() {
       cerrarExperiencia();
     }
   };
+  function aplicarTemaSegunURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const codigo = (urlParams.get('codigo') || '').toUpperCase();
+
+    document.body.classList.remove('theme-alegria', 'theme-calma', 'theme-amorpropio', 'theme-gratitud');
+
+    if (codigo.includes('AMORPROPIO') || codigo.includes('AMOR')) {
+        document.body.classList.add('theme-amorpropio');
+    } else if (codigo.includes('CALMA')) {
+        document.body.classList.add('theme-calma');
+    } else if (codigo.includes('GRATITUD')) {
+        document.body.classList.add('theme-gratitud');
+    } else {
+        document.body.classList.add('theme-alegria');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
 </script>
 <script>
   function pedirCodigo() {
