@@ -1884,3 +1884,38 @@ button.btn-timer.active {
     text-align: center !important;
   }
 }
+/* ===================================================
+   ESTILOS DINÁMICOS PARA TODOS LOS TEMAS (EMORIA)
+   =================================================== */
+
+/* --- TEMA ALEGRÍA --- */
+body.theme-alegria .tag-badge,
+body.theme-alegria div[class*="tag-badge"] {
+    background: rgba(230, 126, 34, 0.35) !important;
+    border-color: rgba(243, 156, 18, 0.6) !important;
+    color: #f39c12 !important;
+}
+
+/* --- TEMA CALMA --- */
+body.theme-calma .tag-badge,
+body.theme-calma div[class*="tag-badge"] {
+    background: rgba(91, 105, 199, 0.35) !important;
+    border-color: rgba(123, 136, 238, 0.6) !important;
+    color: #7b88ee !important;
+}
+
+/* --- TEMA AMOR PROPIO --- */
+body.theme-amorpropio .tag-badge,
+body.theme-amorpropio div[class*="tag-badge"] {
+    background: rgba(196, 69, 112, 0.35) !important;
+    border-color: rgba(232, 110, 151, 0.6) !important;
+    color: #e86e97 !important;
+}
+
+/* --- TEMA GRATITUD --- */
+body.theme-gratitud .tag-badge,
+body.theme-gratitud div[class*="tag-badge"] {
+    background: rgba(173, 82, 50, 0.35) !important;
+    border-color: rgba(211, 115, 80, 0.6) !important;
+    color: #d37350 !important;
+}

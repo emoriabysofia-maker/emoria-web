@@ -634,17 +634,27 @@ window.addEventListener('DOMContentLoaded', function() {
     var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
     var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
 
+    document.body.classList.remove('theme-alegria', 'theme-calma', 'theme-gratitud', 'theme-amorpropio');
+
+    if (claveFinal === 'CALMA') {
+        document.body.classList.add('theme-calma');
+    } else if (claveFinal === 'GRATITUD') {
+        document.body.classList.add('theme-gratitud');
+    } else if (claveFinal === 'AMORPROPIO') {
+        document.body.classList.add('theme-amorpropio');
+    } else {
+        document.body.classList.add('theme-alegria');
+    }
+
     var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
 
     if (datos) {
-        // 1. Actualizar Badge y Subtítulo
         var badge = document.querySelector('.tag-badge');
         if (badge) badge.innerText = " VELA " + datos.titulo;
 
         var subtitulo = document.querySelector('.subtitle');
         if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-        // 2. Actualizar Notas Aromáticas (Búsqueda directa en cajas o por ID)
         var elSalida = document.getElementById('nota-salida');
         var elCorazon = document.getElementById('nota-corazon');
         var elFondo = document.getElementById('nota-fondo');
@@ -653,14 +663,6 @@ window.addEventListener('DOMContentLoaded', function() {
         if (elCorazon) elCorazon.innerText = datos.notas.corazon;
         if (elFondo) elFondo.innerText = datos.notas.fondo;
 
-        var bloquesNotas = document.querySelectorAll('.nota-box p, .notas-aromaticas p');
-        if (bloquesNotas.length >= 3) {
-            bloquesNotas[0].innerText = datos.notas.salida;
-            bloquesNotas[1].innerText = datos.notas.corazon;
-            bloquesNotas[2].innerText = datos.notas.fondo;
-        }
-
-        // 3. Reproducir Video
         var videoElement = document.getElementById('video-vela');
         if (videoElement) {
             videoElement.muted = true;
@@ -671,11 +673,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
             videoElement.load();
             videoElement.play().catch(function(e) {
-                console.log("Autoplay de video restringido por navegador:", e);
+                console.log("Autoplay restringido por navegador:", e);
             });
         }
 
-        // 4. Cargar Audio
         var audioElement = document.getElementById('audio-experiencia');
         if (audioElement && datos.audioUrl) {
             var audioSource = audioElement.querySelector('source') || audioElement;
