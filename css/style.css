@@ -1926,8 +1926,8 @@ body.theme-gratitud div[class*="tag-badge"] {
     width: 100% !important;
     height: 100% !important;
     z-index: 99999 !important;
-    background: rgba(0, 0, 0, 0.9) !important;
-    display: none; /* Se oculta por defecto hasta que el JS lo abra */
+    background: rgba(0, 0, 0, 0.95) !important;
+    display: none;
     justify-content: center;
     align-items: center;
     overflow-y: auto !important;
