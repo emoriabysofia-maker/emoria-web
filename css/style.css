@@ -1919,7 +1919,7 @@ body.theme-gratitud div[class*="tag-badge"] {
     border-color: rgba(211, 115, 80, 0.6) !important;
     color: #d37350 !important;
 }
-#modalExperiencia {
+#modal-experiencia {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -1931,4 +1931,8 @@ body.theme-gratitud div[class*="tag-badge"] {
     justify-content: center;
     align-items: center;
     overflow-y: auto !important;
+}
+
+#modal-experiencia.active {
+    display: flex !important;
 }
