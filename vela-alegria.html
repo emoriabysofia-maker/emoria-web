@@ -277,7 +277,7 @@
     #player-screen.active {
       display: block !important;
     }
-    
+
   </style>
 </head>
 <body>
@@ -409,7 +409,10 @@ function mostrarReproductor() {
     const pinScreen = document.getElementById("pin-screen");
     const playerScreen = document.getElementById("player-screen");
 
-    if (pinScreen) pinScreen.style.display = "none";
+    if (pinScreen) {
+        pinScreen.style.display = "none";
+        pinScreen.classList.add("hidden");
+    }
     if (playerScreen) {
         playerScreen.style.display = "block";
         playerScreen.classList.add("active");
