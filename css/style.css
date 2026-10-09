@@ -1937,6 +1937,14 @@ body.theme-gratitud div[class*="tag-badge"] {
     display: flex !important;
 }
 /* Manejo de pantallas en vela-alegria.html */
+#pin-screen {
+    display: block !important;
+}
+
+#pin-screen.hidden {
+    display: none !important;
+}
+
 #player-screen {
     display: none !important;
 }
