@@ -1936,3 +1936,14 @@ body.theme-gratitud div[class*="tag-badge"] {
 #modal-experiencia.active {
     display: flex !important;
 }
+/* Manejo de pantallas en vela-alegria.html */
+#player-screen {
+    display: none;
+}
+
+#player-screen.active {
+    display: block !important;
+}
+#player-screen {
+    display: none;
+}
