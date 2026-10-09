@@ -378,33 +378,36 @@
     const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
 
     function validarPin() {
-      const pinInput = document.getElementById("pin-input");
-      const errorMsg = document.getElementById("error-msg");
-      
-      if (!pinInput) return;
-      const pin = pinInput.value.trim().toUpperCase();
+    const pinInput = document.getElementById("pin-input");
+    const errorMsg = document.getElementById("error-msg");
 
-      if (PINS_VALIDOS.includes(pin)) {
+    if (!pinInput) return;
+    const pin = pinInput.value.trim().toUpperCase();
+
+    if (PINS_VALIDOS.includes(pin)) {
         localStorage.setItem("acceso_vela_alegria", "concedido");
         mostrarReproductor();
-      } else {
+    } else {
         if (errorMsg) errorMsg.style.display = "block";
-      }
+    }
+}
+
+function mostrarReproductor() {
+    const pinScreen = document.getElementById("pin-screen");
+    const playerScreen = document.getElementById("player-screen");
+
+    if (pinScreen) pinScreen.style.display = "none";
+    if (playerScreen) {
+        playerScreen.style.display = "block";
+        playerScreen.classList.add("active");
     }
 
-    function mostrarReproductor() {
-      const pinScreen = document.getElementById("pin-screen");
-      const playerScreen = document.getElementById("player-screen");
-      
-      if (pinScreen) pinScreen.style.display = "none";
-      if (playerScreen) playerScreen.style.display = "block";
-      
-      const videoVela = document.getElementById("video-vela");
-      if (videoVela) {
+    const videoVela = document.getElementById("video-vela");
+    if (videoVela) {
         videoVela.muted = true;
         videoVela.play().catch(e => console.log("Info reproduccion video:", e));
-      }
     }
+}
 
     document.addEventListener("DOMContentLoaded", () => {
       const audio = document.getElementById("audio-player");
