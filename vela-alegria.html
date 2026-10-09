@@ -626,44 +626,28 @@ var playlistData = {
     "ALEGRIA": {
         titulo: "ALEGRÍA",
         subtitulo: "Energía vibrante y positividad para tu día.",
-        notas: {
-            salida: "Verbena Mandarina",
-            corazon: "Fresa Frambuesa",
-            fondo: "Limoncillo"
-        },
+        intencion: "Hoy elijo conectar con la luz, la gratitud y la energía expansiva que habita en mí.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/alegria.mp3"
     },
     "CALMA": {
         titulo: "CALMA",
         subtitulo: "Paz interior, serenidad y relajación profunda.",
-        notas: {
-            salida: "Eucalipto",
-            corazon: "Lavanda",
-            fondo: "Piedras Marinas"
-        },
-       videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
+        intencion: "Inhalo paz, exhalo tensión. Este momento es solo mío y de mi serenidad.",
+        videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/calma.mp3"
     },
     "GRATITUD": {
         titulo: "GRATITUD",
         subtitulo: "Conexión, calidez y apreciación del presente.",
-        notas: {
-            salida: "Eucalipto",
-            corazon: "Verbena Mandarina",
-            fondo: "Sándalo"
-        },
+        intencion: "Agradezco el presente, reconozco mi camino y honro cada paso dado.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/gratitud.mp3"
     },
     "AMORPROPIO": {
         titulo: "AMOR PROPIO",
         subtitulo: "Abrazo cálido, autoestima y empoderamiento.",
-        notas: {
-            salida: "Fresa Frambuesa",
-            corazon: "Jazmín",
-            fondo: "Vainilla Francesa"
-        },
+        intencion: "Me reconozco, me valoro y me habito con ternura y compasión.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
         audioUrl: "https://ejemplo.com/audios/amorpropio.mp3"
     }
@@ -705,13 +689,10 @@ window.addEventListener('DOMContentLoaded', function() {
         var subtitulo = document.querySelector('.subtitle');
         if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-        var elSalida = document.getElementById('nota-salida');
-        var elCorazon = document.getElementById('nota-corazon');
-        var elFondo = document.getElementById('nota-fondo');
-
-        if (elSalida) elSalida.innerText = datos.notas.salida;
-        if (elCorazon) elCorazon.innerText = datos.notas.corazon;
-        if (elFondo) elFondo.innerText = datos.notas.fondo;
+        var elIntencion = document.getElementById('modal-intencion');
+        if (elIntencion && datos.intencion) {
+            elIntencion.innerText = datos.intencion;
+        }
 
         var videoElement = document.getElementById('video-vela');
         if (videoElement) {
