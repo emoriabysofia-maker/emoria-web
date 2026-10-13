@@ -1642,31 +1642,39 @@ nav:hover {
 #player-screen.active {
   display: block !important;
 }
-/* Contenedor del Resplandor de Fondo */
+/* Contenedor del Resplandor de Fondo Vibrante */
 .ambient-glow {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.8;
+    filter: blur(60px);
+    opacity: 0.65;
     z-index: 0;
     pointer-events: none;
-    transition: background 1s ease-in-out;
+    transition: background 1.2s ease-in-out, opacity 1.2s ease-in-out;
 }
 
-/* Colores Intensos por Emoción */
-.glow-alegria { background: radial-gradient(circle, #ff9f43 0%, #ee5253 60%, transparent 80%); }
-.glow-calma { background: radial-gradient(circle, #0abde3 0%, #10ac84 60%, transparent 80%); }
-.glow-gratitud { background: radial-gradient(circle, #5f27cd 0%, #ff9f43 60%, transparent 80%); }
-.glow-amorpropio { background: radial-gradient(circle, #ff6b6b 0%, #f368e0 60%, transparent 80%); }
+/* Colores Vibrantes e Intensos */
+.glow-alegria { 
+    background: radial-gradient(circle, rgba(255, 159, 67, 0.9) 0%, rgba(238, 82, 83, 0.6) 50%, transparent 80%); 
+}
+.glow-calma { 
+    background: radial-gradient(circle, rgba(0, 210, 211, 0.9) 0%, rgba(9, 132, 227, 0.6) 50%, transparent 80%); 
+}
+.glow-gratitud { 
+    background: radial-gradient(circle, rgba(156, 136, 255, 0.9) 0%, rgba(232, 67, 147, 0.6) 50%, transparent 80%); 
+}
+.glow-amorpropio { 
+    background: radial-gradient(circle, rgba(255, 118, 117, 0.9) 0%, rgba(253, 121, 168, 0.6) 50%, transparent 80%); 
+}
 
-/* Capas y transparencia */
+/* Fondo general */
 body {
-    background-color: #0d0d0d !important;
+    background-color: #08080a !important;
 }
 
 .container, #player-screen, #pin-screen {
