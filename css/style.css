@@ -1642,36 +1642,29 @@ nav:hover {
 #player-screen.active {
   display: block !important;
 }
-/* Contenedor del Resplandor de Fondo Vibrante */
-/* Fondo general totalmente oscuro para contraste */
-body {
-    background-color: #050505 !important;
-}
-
-/* Transparencia total en contenedores para dejar pasar la luz */
-.container, #player-screen, #pin-screen, .card, .player-card {
-    background-color: transparent !important;
-    position: relative;
-    z-index: 10;
-}
-
-/* Forzar mayor brillo y expansión en el resplandor */
+/* Contenedor del Resplandor de Fondo */
 #ambient-glow, .ambient-glow {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 85vw !important;
-    height: 85vh !important;
+    width: 600px !important;
+    height: 600px !important;
     border-radius: 50% !important;
-    filter: blur(50px) !important;
-    opacity: 0.95 !important;
-    z-index: 0 !important;
+    filter: blur(40px) !important;
+    opacity: 0.9 !important;
+    z-index: 1 !important;
     pointer-events: none !important;
 }
 
-/* Colores Neón Vibrantes */
-.glow-alegria { background: radial-gradient(circle, #ff9f43 10%, #ee5253 60%, transparent 80%) !important; }
-.glow-calma { background: radial-gradient(circle, #00d2d3 10%, #54a0ff 60%, transparent 80%) !important; }
-.glow-gratitud { background: radial-gradient(circle, #a29bfe 10%, #fd79a8 60%, transparent 80%) !important; }
-.glow-amorpropio { background: radial-gradient(circle, #ff7675 10%, #e84393 60%, transparent 80%) !important; }
+/* Colores Neón Puros */
+.glow-alegria { background: #ff9f43 !important; box-shadow: 0 0 120px #ff9f43 !important; }
+.glow-calma { background: #00d2d3 !important; box-shadow: 0 0 120px #00d2d3 !important; }
+.glow-gratitud { background: #a29bfe !important; box-shadow: 0 0 120px #a29bfe !important; }
+.glow-amorpropio { background: #ff7675 !important; box-shadow: 0 0 120px #ff7675 !important; }
+
+/* La tarjeta debe quedar por encima del resplandor */
+.container, #player-screen, #pin-screen {
+    position: relative !important;
+    z-index: 10 !important;
+}
