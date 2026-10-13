@@ -1643,41 +1643,35 @@ nav:hover {
   display: block !important;
 }
 /* Contenedor del Resplandor de Fondo Vibrante */
-.ambient-glow {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw;
-    height: 90vh;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.65;
-    z-index: 0;
-    pointer-events: none;
-    transition: background 1.2s ease-in-out, opacity 1.2s ease-in-out;
-}
-
-/* Colores Vibrantes e Intensos */
-.glow-alegria { 
-    background: radial-gradient(circle, rgba(255, 159, 67, 0.9) 0%, rgba(238, 82, 83, 0.6) 50%, transparent 80%); 
-}
-.glow-calma { 
-    background: radial-gradient(circle, rgba(0, 210, 211, 0.9) 0%, rgba(9, 132, 227, 0.6) 50%, transparent 80%); 
-}
-.glow-gratitud { 
-    background: radial-gradient(circle, rgba(156, 136, 255, 0.9) 0%, rgba(232, 67, 147, 0.6) 50%, transparent 80%); 
-}
-.glow-amorpropio { 
-    background: radial-gradient(circle, rgba(255, 118, 117, 0.9) 0%, rgba(253, 121, 168, 0.6) 50%, transparent 80%); 
-}
-
-/* Fondo general */
+/* Fondo general totalmente oscuro para contraste */
 body {
-    background-color: #08080a !important;
+    background-color: #050505 !important;
 }
 
-.container, #player-screen, #pin-screen {
+/* Transparencia total en contenedores para dejar pasar la luz */
+.container, #player-screen, #pin-screen, .card, .player-card {
+    background-color: transparent !important;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
+
+/* Forzar mayor brillo y expansión en el resplandor */
+#ambient-glow, .ambient-glow {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 85vw !important;
+    height: 85vh !important;
+    border-radius: 50% !important;
+    filter: blur(50px) !important;
+    opacity: 0.95 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Colores Neón Vibrantes */
+.glow-alegria { background: radial-gradient(circle, #ff9f43 10%, #ee5253 60%, transparent 80%) !important; }
+.glow-calma { background: radial-gradient(circle, #00d2d3 10%, #54a0ff 60%, transparent 80%) !important; }
+.glow-gratitud { background: radial-gradient(circle, #a29bfe 10%, #fd79a8 60%, transparent 80%) !important; }
+.glow-amorpropio { background: radial-gradient(circle, #ff7675 10%, #e84393 60%, transparent 80%) !important; }
