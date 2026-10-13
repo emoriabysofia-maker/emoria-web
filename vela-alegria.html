@@ -308,32 +308,50 @@
     #player-screen.active {
       display: block !important;
     }
-    /* Sobreescribir el fondo del body e intensificar resplandor */
+   /* Animación suave tipo respiración / ondas */
+@keyframes ambientPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.92);
+        opacity: 0.75;
+        filter: blur(50px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.08);
+        opacity: 0.95;
+        filter: blur(65px);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.92);
+        opacity: 0.75;
+        filter: blur(50px);
+    }
+}
+
+/* Neutralizar el fondo del body */
 body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amorpropio {
     background: #08080a !important;
 }
 
+/* Resplandor con movimiento */
 #ambient-glow, .ambient-glow {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 650px !important;
-    height: 650px !important;
+    width: 520px !important;
+    height: 520px !important;
     border-radius: 50% !important;
-    filter: blur(60px) !important;
-    opacity: 0.9 !important;
     z-index: 1 !important;
     pointer-events: none !important;
+    animation: ambientPulse 8s ease-in-out infinite !important; /* Movimiento suave de 8 segundos */
 }
 
-/* Luces intensas por emoción */
-.glow-alegria { background: #ff9f43 !important; box-shadow: 0 0 160px #ff9f43 !important; }
-.glow-calma { background: #00d2d3 !important; box-shadow: 0 0 160px #00d2d3 !important; }
-.glow-gratitud { background: #a29bfe !important; box-shadow: 0 0 160px #a29bfe !important; }
-.glow-amorpropio { background: #ff7675 !important; box-shadow: 0 0 160px #ff7675 !important; }
+/* Colores Ajustados */
+.glow-alegria { background: #ff9f43 !important; box-shadow: 0 0 140px #ff9f43 !important; }
+.glow-calma { background: #00d2d3 !important; box-shadow: 0 0 140px #00d2d3 !important; }
+.glow-gratitud { background: #38ef7d !important; box-shadow: 0 0 140px #2575fc !important; background: radial-gradient(circle, #4a00e0 10%, #8e2de2 70%) !important; } /* Azul / Violeta Místico */
+.glow-amorpropio { background: #ff7675 !important; box-shadow: 0 0 140px #ff7675 !important; }
 
-/* Tarjetas por encima del glow */
+/* Contenedores en capas superiores */
 .container, #player-screen, #pin-screen {
     position: relative !important;
     z-index: 10 !important;
