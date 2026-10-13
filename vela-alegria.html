@@ -308,22 +308,23 @@
     #player-screen.active {
       display: block !important;
     }
-   /* Animación suave tipo respiración / ondas */
-@keyframes ambientPulse {
+   /* Animación de Olas / Líquido Orgánico (Morphing Blob) */
+@keyframes waveMorph {
     0% {
-        transform: translate(-50%, -50%) scale(0.92);
-        opacity: 0.75;
-        filter: blur(50px);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.95);
     }
-    50% {
-        transform: translate(-50%, -50%) scale(1.08);
-        opacity: 0.95;
-        filter: blur(65px);
+    34% {
+        border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+        transform: translate(-50%, -50%) rotate(120deg) scale(1.08);
+    }
+    67% {
+        border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%;
+        transform: translate(-50%, -50%) rotate(240deg) scale(0.98);
     }
     100% {
-        transform: translate(-50%, -50%) scale(0.92);
-        opacity: 0.75;
-        filter: blur(50px);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: translate(-50%, -50%) rotate(360deg) scale(0.95);
     }
 }
 
@@ -332,26 +333,40 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
     background: #08080a !important;
 }
 
-/* Resplandor con movimiento */
+/* Resplandor con movimiento de olas orgánicas */
 #ambient-glow, .ambient-glow {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
-    width: 520px !important;
-    height: 520px !important;
-    border-radius: 50% !important;
+    width: 580px !important;
+    height: 580px !important;
+    filter: blur(55px) !important;
+    opacity: 0.88 !important;
     z-index: 1 !important;
     pointer-events: none !important;
-    animation: ambientPulse 8s ease-in-out infinite !important; /* Movimiento suave de 8 segundos */
+    animation: waveMorph 14s ease-in-out infinite !important; /* Animación fluida e irregular */
 }
 
-/* Colores Ajustados */
-.glow-alegria { background: #ff9f43 !important; box-shadow: 0 0 140px #ff9f43 !important; }
-.glow-calma { background: #00d2d3 !important; box-shadow: 0 0 140px #00d2d3 !important; }
-.glow-gratitud { background: #38ef7d !important; box-shadow: 0 0 140px #2575fc !important; background: radial-gradient(circle, #4a00e0 10%, #8e2de2 70%) !important; } /* Azul / Violeta Místico */
-.glow-amorpropio { background: #ff7675 !important; box-shadow: 0 0 140px #ff7675 !important; }
+/* Colores Neón por Emoción */
+.glow-alegria { 
+    background: radial-gradient(circle, #ff9f43 20%, #ee5253 80%) !important; 
+    box-shadow: 0 0 150px #ff9f43 !important; 
+}
+.glow-calma { 
+    background: radial-gradient(circle, #00d2d3 20%, #54a0ff 80%) !important; 
+    box-shadow: 0 0 150px #00d2d3 !important; 
+}
+/* GRATITUD EN VERDE ESMERALDA VIBRANTE */
+.glow-gratitud { 
+    background: radial-gradient(circle, #1dd1a1 20%, #10ac84 80%) !important; 
+    box-shadow: 0 0 150px #1dd1a1 !important; 
+}
+.glow-amorpropio { 
+    background: radial-gradient(circle, #ff7675 20%, #e84393 80%) !important; 
+    box-shadow: 0 0 150px #ff7675 !important; 
+}
 
-/* Contenedores en capas superiores */
+/* Tarjetas por encima del resplandor */
 .container, #player-screen, #pin-screen {
     position: relative !important;
     z-index: 10 !important;
