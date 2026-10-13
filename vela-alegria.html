@@ -665,6 +665,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
     var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
+    var elGlow = document.getElementById('ambient-glow');
+    if (elGlow && claveFinal) {
+        var colorClass = 'glow-' + claveFinal.toLowerCase();
+        elGlow.className = 'ambient-glow ' + colorClass;
+    }
 
     document.body.classList.remove('theme-alegria', 'theme-calma', 'theme-gratitud', 'theme-amorpropio');
 
@@ -692,12 +697,6 @@ window.addEventListener('DOMContentLoaded', function() {
             elIntencion.innerText = `"${datos.intencion}"`;
         }
 
-        var elGlow = document.getElementById('ambient-glow');
-        if (elGlow && claveFinal) {
-            var colorClass = 'glow-' + claveFinal.toLowerCase();
-            elGlow.className = 'ambient-glow ' + colorClass;
-        }
-        
         var videoElement = document.getElementById('video-vela');
         if (videoElement) {
             videoElement.muted = true;
