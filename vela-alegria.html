@@ -312,6 +312,8 @@
   </style>
 </head>
 <body>
+<!-- Fondo Dinámico con Aurora/Glow -->
+<div id="ambient-glow" class="ambient-glow"></div>
 
   <div class="container">
 
@@ -690,6 +692,12 @@ window.addEventListener('DOMContentLoaded', function() {
             elIntencion.innerText = `"${datos.intencion}"`;
         }
 
+        var elGlow = document.getElementById('ambient-glow');
+        if (elGlow && claveFinal) {
+            var colorClass = 'glow-' + claveFinal.toLowerCase();
+            elGlow.className = 'ambient-glow ' + colorClass;
+        }
+        
         var videoElement = document.getElementById('video-vela');
         if (videoElement) {
             videoElement.muted = true;

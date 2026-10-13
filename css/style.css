@@ -1642,3 +1642,30 @@ nav:hover {
 #player-screen.active {
   display: block !important;
 }
+/* Contenedor del Resplandor de Fondo */
+.ambient-glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140vw;
+    height: 140vh;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    z-index: -1;
+    pointer-events: none;
+    transition: background 1.5s ease-in-out;
+    animation: pulseGlow 8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.25; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.45; }
+}
+
+/* Colores por Emoción */
+.glow-alegria { background: radial-gradient(circle, #f39c12, #e67e22, transparent 70%); }
+.glow-calma { background: radial-gradient(circle, #2980b9, #16a085, transparent 70%); }
+.glow-gratitud { background: radial-gradient(circle, #8e44ad, #d35400, transparent 70%); }
+.glow-amorpropio { background: radial-gradient(circle, #e84393, #fd79a8, transparent 70%); }
