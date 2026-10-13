@@ -1648,33 +1648,28 @@ nav:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 140vw;
-    height: 140vh;
+    width: 100vw;
+    height: 100vh;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    z-index: -1;
+    filter: blur(80px);
+    opacity: 0.8;
+    z-index: 0;
     pointer-events: none;
-    transition: background 1.5s ease-in-out;
-    animation: pulseGlow 8s infinite alternate ease-in-out;
+    transition: background 1s ease-in-out;
 }
 
-@keyframes pulseGlow {
-    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.25; }
-    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.45; }
-}
+/* Colores Intensos por Emoción */
+.glow-alegria { background: radial-gradient(circle, #ff9f43 0%, #ee5253 60%, transparent 80%); }
+.glow-calma { background: radial-gradient(circle, #0abde3 0%, #10ac84 60%, transparent 80%); }
+.glow-gratitud { background: radial-gradient(circle, #5f27cd 0%, #ff9f43 60%, transparent 80%); }
+.glow-amorpropio { background: radial-gradient(circle, #ff6b6b 0%, #f368e0 60%, transparent 80%); }
 
-/* Colores por Emoción */
-.glow-alegria { background: radial-gradient(circle, #f39c12, #e67e22, transparent 70%); }
-.glow-calma { background: radial-gradient(circle, #2980b9, #16a085, transparent 70%); }
-.glow-gratitud { background: radial-gradient(circle, #8e44ad, #d35400, transparent 70%); }
-.glow-amorpropio { background: radial-gradient(circle, #e84393, #fd79a8, transparent 70%); }
-
-/* Hacer transparentes las capas para dejar ver el resplandor de fondo */
+/* Capas y transparencia */
 body {
-    background-color: #0b0b0b !important;
+    background-color: #0d0d0d !important;
 }
 
-.container, #player-screen {
-    background: transparent !important;
+.container, #player-screen, #pin-screen {
+    position: relative;
+    z-index: 1;
 }
