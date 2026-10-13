@@ -308,6 +308,36 @@
     #player-screen.active {
       display: block !important;
     }
+    /* Sobreescribir el fondo del body e intensificar resplandor */
+body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amorpropio {
+    background: #08080a !important;
+}
+
+#ambient-glow, .ambient-glow {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 650px !important;
+    height: 650px !important;
+    border-radius: 50% !important;
+    filter: blur(60px) !important;
+    opacity: 0.9 !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* Luces intensas por emoción */
+.glow-alegria { background: #ff9f43 !important; box-shadow: 0 0 160px #ff9f43 !important; }
+.glow-calma { background: #00d2d3 !important; box-shadow: 0 0 160px #00d2d3 !important; }
+.glow-gratitud { background: #a29bfe !important; box-shadow: 0 0 160px #a29bfe !important; }
+.glow-amorpropio { background: #ff7675 !important; box-shadow: 0 0 160px #ff7675 !important; }
+
+/* Tarjetas por encima del glow */
+.container, #player-screen, #pin-screen {
+    position: relative !important;
+    z-index: 10 !important;
+}
 
   </style>
 </head>
