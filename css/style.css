@@ -1679,6 +1679,7 @@ nav:hover {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    transform: scale(1.15) !important;
     border-radius: 20px !important;
     display: block !important;
 }
