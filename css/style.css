@@ -1646,3 +1646,27 @@ nav:hover {
 #player-screen.active {
   display: block !important;
 }
+.purpose-quote-card.qr-center-card,
+.qr-center-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.qr-box {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 280px !important;
+    height: auto !important;
+    margin: 0 auto 24px auto !important;
+}
+
+.qr-code-img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 20px !important;
+    object-fit: cover !important;
+}
