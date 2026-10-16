@@ -1034,7 +1034,7 @@ footer{
 
 .purpose-candle-img {
   width: 100%;
-  max-width: 320px; /* Controla el ancho de la imagen */
+  max-width: 320px;
   height: auto;
   max-height: 400px;
   object-fit: cover;
@@ -1095,7 +1095,7 @@ footer{
 }
 
 .qr-center-card .qr-card-title {
-  color: #ffffff !important;
+  color: #f2ebd9 !important;
   font-family: 'Cormorant Garamond', serif !important;
   font-size: 1.5rem !important;
   margin-top: 15px !important;
@@ -1103,16 +1103,16 @@ footer{
 }
 
 .qr-center-card .qr-card-text {
-  color: #a3b8b0 !important;
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 300 !important;
-  line-height: 1.5 !important;
-  margin-bottom: 20px !important;
+    color: rgba(242, 235, 217, 0.75) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 300 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 20px !important;
 }
 
 .qr-center-card .qr-box {
-  background: #ffffff !important;
+  background: #f2ebd9 !important;
   padding: 12px !important;
   border-radius: 16px !important;
   display: inline-block !important;
