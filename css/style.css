@@ -1021,9 +1021,9 @@ footer{
 }
 
 .btn-qr-playlist:hover {
-  background-color: #ffffff;
+  background-color: #f2ebd9;
   color: #071915;
-  border-color: #ffffff;
+  border-color: #f2ebd9;
 }
 .purpose-image-wrapper {
   display: flex;
