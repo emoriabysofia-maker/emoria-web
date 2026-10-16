@@ -1119,11 +1119,14 @@ footer{
 }
 
 .qr-center-card .qr-code-img {
-  width: 140px !important;
-  height: 140px !important;
-  object-fit: contain !important;
-  display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: scale(1.35) !important;
+    border-radius: 20px !important;
+    display: block !important;
 }
+
 .qr-center-card .qr-box {
   background: #ffffff !important;
   padding: 14px !important;
