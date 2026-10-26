@@ -896,6 +896,14 @@ const playlistData = {
     }
 };
 
+function obtenerDeviceId() {
+    let deviceId = localStorage.getItem('emoria_device_id');
+    if (!deviceId) {
+        deviceId = 'DEV-' + Math.random().toString(36).substring(2, 11) + '-' + Date.now().toString(36);
+        localStorage.setItem('emoria_device_id', deviceId);
+    }
+    return deviceId;
+}
 function validarCodigoModal() {
     var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
 
@@ -910,6 +918,8 @@ function validarCodigoModal() {
 
     if (playlistData[claveFinal]) {
         cerrarModal();
+        obtenerDeviceId();
+        localStorage.setItem('emoria_ultimo_codigo', codigoInput);
         window.location.href = "vela-alegria.html?codigo=" + claveFinal;
     } else {
         var errorMsg = document.getElementById('error-msg');
