@@ -17,6 +17,7 @@
 
 
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
   @media (max-width: 768px) {
     /* 1. Ocultar scroll horizontal estrictamente */
@@ -477,6 +478,73 @@
 
   <!-- SCRIPT PARA INTERACTIVIDAD -->
   <script>
+    // --- INICIALIZACIÓN SUPABASE ---
+  const SUPABASE_URL = 'https://ifmljazmnfbxfrxgigkb.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_TAERLVN8NiTlRrQ3xszp1g_ihuVwgNZ';
+  
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Obtener o generar un ID único de este dispositivo/navegador
+  function getDeviceId() {
+    let devId = localStorage.getItem('emoria_device_id');
+    if (!devId) {
+      devId = 'dev_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+      localStorage.setItem('emoria_device_id', devId);
+    }
+    return devId;
+  }
+
+  // Función principal para validar y activar el código de producto
+  async function activarProducto(codigoIngresado) {
+    const meDeviceId = getDeviceId();
+    const codigoLimpio = codigoIngresado.trim().toUpperCase();
+
+    if (!codigoLimpio) {
+      alert('Por favor ingresa un código válido.');
+      return;
+    }
+
+    // 1. Consultar si el código existe en la base de datos
+    const { data, error } = await supabase
+      .from('activaciones')
+      .select('*')
+      .eq('codigo', codigoLimpio)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error al consultar:', error);
+      alert('Ocurrió un error al verificar el código.');
+      return;
+    }
+
+    if (!data) {
+      alert('El código ingresado no es válido.');
+      return;
+    }
+
+    // 2. Verificar si ya fue registrado en otro dispositivo
+    if (data.device_id && data.device_id !== meDeviceId) {
+      alert('Este código ya fue utilizado en otro dispositivo.');
+      return;
+    }
+
+    // 3. Vincular al dispositivo actual si aún no está asignado
+    if (!data.device_id) {
+      const { error: updateError } = await supabase
+        .from('activaciones')
+        .update({ device_id: meDeviceId })
+        .eq('codigo', codigoLimpio);
+
+      if (updateError) {
+        alert('Error al activar el producto.');
+        return;
+      }
+    }
+
+    // Guardar estado de activación local
+    localStorage.setItem('emoria_activado', 'true');
+    alert('¡Producto activado con éxito!');
+  }
     // Filtro de tienda
     const tabs = document.querySelectorAll('.filter-tabs .tab');
     const cards = document.querySelectorAll('.product-card');
