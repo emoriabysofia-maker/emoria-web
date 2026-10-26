@@ -915,6 +915,18 @@ document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
   function cerrarModal() {
     document.getElementById('modal-codigo').classList.remove('active');
   }
+async function validarCodigoModal() {
+  const input = document.getElementById('input-codigo');
+  const errorMsg = document.getElementById('error-msg');
+  if (!input) return;
+  const codigo = input.value.trim();
+  if (!codigo) {
+    if (errorMsg) errorMsg.innerText = 'Por favor ingresa un código.';
+    return;
+  }
+  if (errorMsg) errorMsg.innerText = 'Verificando...';
+  await activarProducto(codigo);
+}
 
   // Base de datos de las experiencias de cada vela
 const playlistData = {
@@ -984,14 +996,14 @@ function validarCodigoModal() {
 
     var claveFinal = claveMap[codigoInput] || codigoInput;
 
-    if (playlistData[claveFinal]) {
+    await activarProducto(codigoInput);
+
+    if (localStorage.getItem('emoria_activado') === 'true') {
         cerrarModal();
-        obtenerDeviceId();
-        localStorage.setItem('emoria_ultimo_codigo', codigoInput);
         window.location.href = "vela-alegria.html?codigo=" + claveFinal;
     } else {
         var errorMsg = document.getElementById('error-msg');
-        if (errorMsg) errorMsg.innerText = "Código incorrecto. Intenta de nuevo.";
+        if (errorMsg) errorMsg.innerText = "Código incorrecto o ya usado en otro dispositivo.";
     }
 }
 
