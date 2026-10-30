@@ -975,31 +975,21 @@ const playlistData = {
         }
     }
 };
-async function pedirCodigo(emocion) {
-    var codigo = prompt("Ingresa tu código de activación:");
-    if (!codigo) return;
+var emocionSeleccionada = 'ALEGRIA';
 
-    var codigoLimpio = codigo.trim().toUpperCase();
-
-    if (typeof supabase !== 'undefined') {
-        const { data, error } = await supabase
-            .from('activaciones')
-            .select('*')
-            .eq('codigo_activacion', codigoLimpio)
-            .single();
-
-        if (error || !data) {
-            alert("El código ingresado no existe.");
-            return;
-        }
-
-        if (data.usado) {
-            alert("Este código ya fue utilizado.");
-            return;
-        }
+function pedirCodigo(emocion) {
+    emocionSeleccionada = emocion || 'ALEGRIA';
+    var modal = document.getElementById('modal-codigo');
+    if (modal) {
+        modal.style.display = 'flex';
     }
+}
 
-    window.location.href = `vela-alegria.html?emocion=${emocion}&codigo=${codigoLimpio}`;
+function cerrarModal() {
+    var modal = document.getElementById('modal-codigo');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function obtenerDeviceId() {
@@ -1011,26 +1001,37 @@ function obtenerDeviceId() {
     return deviceId;
 }
 async function validarCodigoModal() {
-    var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
+    var input = document.getElementById('input-codigo');
+    if (!input) return;
 
-    var claveMap = {
-        "ALEGRIA2026": "ALEGRIA",
-        "CALMA2026": "CALMA",
-        "GRATITUD2026": "GRATITUD",
-        "AMORPROPIO2026": "AMORPROPIO"
-    };
-
-    var claveFinal = claveMap[codigoInput] || codigoInput;
-
-    await activarProducto(codigoInput);
-
-    if (localStorage.getItem('emoria_activado') === 'true') {
-        cerrarModal();
-        window.location.href = "vela-alegria.html?codigo=" + claveFinal;
-    } else {
-        var errorMsg = document.getElementById('error-msg');
-        if (errorMsg) errorMsg.innerText = "Código incorrecto o ya usado en otro dispositivo.";
+    var codigoLimpio = input.value.trim().toUpperCase();
+    if (!codigoLimpio) {
+        alert("Por favor ingresa un código.");
+        return;
     }
+
+    if (typeof supabase !== 'undefined') {
+        const { data, error } = await supabase
+            .from('activaciones')
+            .select('*')
+            .eq('codigo_activacion', codigoLimpio)
+            .single();
+
+        if (error || !data) {
+            var errorMsg = document.getElementById('error-msg');
+            if (errorMsg) errorMsg.innerText = "Código incorrecto o no existe.";
+            return;
+        }
+
+        if (data.usado) {
+            var errorMsg = document.getElementById('error-msg');
+            if (errorMsg) errorMsg.innerText = "Este código ya fue utilizado.";
+            return;
+        }
+    }
+
+    cerrarModal();
+    window.location.href = `vela-alegria.html?emocion=${emocionSeleccionada}&codigo=${codigoLimpio}`;
 }
 
 </script>
