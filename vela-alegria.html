@@ -717,6 +717,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     var urlParams = new URLSearchParams(window.location.search);
     var codigoUrl = urlParams.get('codigo');
     var emocionUrl = urlParams.get('emocion');
+    var estaActivado = localStorage.getItem('emoria_activado') === 'true';
 
     var claveFinal = (emocionUrl || codigoUrl || "ALEGRIA").toUpperCase().trim();
 
@@ -724,7 +725,11 @@ window.addEventListener('DOMContentLoaded', async function() {
         window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
-    if (codigoUrl && typeof supabase !== 'undefined') {
+    if (estaActivado || codigoUrl) {
+        if (typeof mostrarReproductor === 'function') {
+            mostrarReproductor();
+        }
+    } else if (codigoUrl && typeof supabase !== 'undefined') {
         const { data, error } = await supabase
             .from('activaciones')
             .select('*')
@@ -732,6 +737,7 @@ window.addEventListener('DOMContentLoaded', async function() {
             .single();
 
         if (data && !data.usado && typeof mostrarReproductor === 'function') {
+            localStorage.setItem('emoria_activado', 'true');
             mostrarReproductor();
         }
     }
