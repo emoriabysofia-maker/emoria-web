@@ -711,19 +711,31 @@ var playlistData = {
 };
 
 // === LECTOR DE CÓDIGO DINÁMICO DE LA URL ===
-window.addEventListener('DOMContentLoaded', function() {
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.addEventListener('DOMContentLoaded', async function() {
     var urlParams = new URLSearchParams(window.location.search);
     var codigoUrl = urlParams.get('codigo');
+    var emocionUrl = urlParams.get('emocion');
 
-    var claveMap = {
-        "ALEGRIA2026": "ALEGRIA",
-        "CALMA2026": "CALMA",
-        "GRATITUD2026": "GRATITUD",
-        "AMORPROPIO2026": "AMORPROPIO"
-    };
+    var claveFinal = (emocionUrl || codigoUrl || "ALEGRIA").toUpperCase().trim();
 
-    var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
-    var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
+    if (typeof supabase === 'undefined' && typeof SUPABASE_URL !== 'undefined') {
+        window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    if (codigoUrl && typeof supabase !== 'undefined') {
+        const { data, error } = await supabase
+            .from('activaciones')
+            .select('*')
+            .eq('codigo_activacion', codigoUrl.toUpperCase())
+            .single();
+
+        if (data && !data.usado && typeof mostrarReproductor === 'function') {
+            mostrarReproductor();
+        }
+    }
+
     var elGlow = document.getElementById('ambient-glow');
     if (elGlow && claveFinal) {
         var colorClass = 'glow-' + claveFinal.toLowerCase();
@@ -742,39 +754,41 @@ window.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('theme-alegria');
     }
 
-    var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
+    if (typeof playlistData !== 'undefined') {
+        var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
 
-    if (datos) {
-        var badge = document.querySelector('.tag-badge');
-        if (badge) badge.innerText = " VELA " + datos.titulo;
+        if (datos) {
+            var badge = document.querySelector('.tag-badge');
+            if (badge) badge.innerText = "VELA " + datos.titulo;
 
-        var subtitulo = document.querySelector('.subtitle');
-        if (subtitulo) subtitulo.innerText = datos.subtitulo;
+            var subtitulo = document.querySelector('.subtitle');
+            if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-       var elIntencion = document.getElementById('affirmation-text');
-        if (elIntencion && datos.intencion) {
-            elIntencion.innerText = `"${datos.intencion}"`;
-        }
+            var elIntencion = document.getElementById('affirmation-text');
+            if (elIntencion && datos.intencion) {
+                elIntencion.innerText = `"${datos.intencion}"`;
+            }
 
-        var videoElement = document.getElementById('video-vela');
-        if (videoElement) {
-            videoElement.muted = true;
-            videoElement.setAttribute('playsinline', '');
+            var videoElement = document.getElementById('video-vela');
+            if (videoElement) {
+                videoElement.muted = true;
+                videoElement.setAttribute('playsinline', '');
 
-            var videoSource = videoElement.querySelector('source') || videoElement;
-            videoSource.src = datos.videoUrl;
+                var videoSource = videoElement.querySelector('source') || videoElement;
+                videoSource.src = datos.videoUrl;
 
-            videoElement.load();
-            videoElement.play().catch(function(e) {
-                console.log("Autoplay restringido por navegador:", e);
-            });
-        }
+                videoElement.load();
+                videoElement.play().catch(function(e) {
+                    console.log("Autoplay restringido:", e);
+                });
+            }
 
-        var audioElement = document.getElementById('audio-experiencia');
-        if (audioElement && datos.audioUrl) {
-            var audioSource = audioElement.querySelector('source') || audioElement;
-            audioSource.src = datos.audioUrl;
-            audioElement.load();
+            var audioElement = document.getElementById('audio-experiencia');
+            if (audioElement && datos.audioUrl) {
+                var audioSource = audioElement.querySelector('source') || audioElement;
+                audioSource.src = datos.audioUrl;
+                audioElement.load();
+            }
         }
     }
 });
