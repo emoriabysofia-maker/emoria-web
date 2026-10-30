@@ -975,6 +975,32 @@ const playlistData = {
         }
     }
 };
+async function pedirCodigo(emocion) {
+    var codigo = prompt("Ingresa tu código de activación:");
+    if (!codigo) return;
+
+    var codigoLimpio = codigo.trim().toUpperCase();
+
+    if (typeof supabase !== 'undefined') {
+        const { data, error } = await supabase
+            .from('activaciones')
+            .select('*')
+            .eq('codigo_activacion', codigoLimpio)
+            .single();
+
+        if (error || !data) {
+            alert("El código ingresado no existe.");
+            return;
+        }
+
+        if (data.usado) {
+            alert("Este código ya fue utilizado.");
+            return;
+        }
+    }
+
+    window.location.href = `vela-alegria.html?emocion=${emocion}&codigo=${codigoLimpio}`;
+}
 
 function obtenerDeviceId() {
     let deviceId = localStorage.getItem('emoria_device_id');
@@ -984,7 +1010,7 @@ function obtenerDeviceId() {
     }
     return deviceId;
 }
-function validarCodigoModal() {
+async function validarCodigoModal() {
     var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
 
     var claveMap = {
