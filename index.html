@@ -1010,28 +1010,40 @@ async function validarCodigoModal() {
         return;
     }
 
-    if (typeof supabase !== 'undefined') {
-        const { data, error } = await supabase
-            .from('activaciones')
-            .select('*')
-            .eq('codigo_activacion', codigoLimpio)
-            .single();
+    var mapaVelas = {
+        'ALEGRIA2026': 'vela-alegria.html',
+        'CALMA2026': 'vela-calma.html',
+        'GRATITUD2026': 'vela-gratitud.html',
+        'AMORPROPIO2026': 'vela-amorpropio.html'
+    };
 
-        if (error || !data) {
-            var errorMsg = document.getElementById('error-msg');
-            if (errorMsg) errorMsg.innerText = "Código incorrecto o no existe.";
-            return;
-        }
+    if (typeof supabase !== 'undefined' && typeof supabase.from === 'function') {
+        try {
+            const { data, error } = await supabase
+                .from('activaciones')
+                .select('*')
+                .eq('codigo_activacion', codigoLimpio)
+                .single();
 
-        if (data.usado) {
-            var errorMsg = document.getElementById('error-msg');
-            if (errorMsg) errorMsg.innerText = "Este código ya fue utilizado.";
-            return;
+            if (error || !data) {
+                var errorMsg = document.getElementById('error-msg');
+                if (errorMsg) errorMsg.innerText = "Código incorrecto o no existe.";
+                return;
+            }
+
+            if (data.usado) {
+                var errorMsg = document.getElementById('error-msg');
+                if (errorMsg) errorMsg.innerText = "Este código ya fue utilizado.";
+                return;
+            }
+        } catch (e) {
+            console.warn("Supabase no listo, procediendo localmente:", e);
         }
     }
 
+    var destino = mapaVelas[codigoLimpio] || `vela-alegria.html?emocion=${emocionSeleccionada}&codigo=${codigoLimpio}`;
     cerrarModal();
-    window.location.href = `vela-alegria.html?emocion=${emocionSeleccionada}&codigo=${codigoLimpio}`;
+    window.location.href = destino;
 }
 
 </script>
