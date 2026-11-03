@@ -482,8 +482,8 @@
   const SUPABASE_URL = 'https://ifmljazmnfbxfrxgigkb.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_TAERLVN8NiTlRrQ3xszp1g_ihuVwgNZ';
   
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  
   // Obtener o generar un ID único de este dispositivo/navegador
   function getDeviceId() {
     let devId = localStorage.getItem('emoria_device_id');
@@ -943,7 +943,6 @@ function validarCodigoModal() {
         window.location.href = "vela-alegria.html?codigo=" + codigo.toUpperCase();
     }
 }
-
   // Base de datos de las experiencias de cada vela
 const playlistData = {
     "ALEGRIA": {
