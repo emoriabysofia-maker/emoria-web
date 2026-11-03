@@ -918,16 +918,30 @@ document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
     document.getElementById('modal-codigo').style.display = 'none';
   }
 function validarCodigoModal() {
-  const input = document.getElementById('input-codigo');
-  const errorMsg = document.getElementById('error-msg');
-  if (!input) return;
-  const codigo = input.value.trim();
-  if (!codigo) {
-    if (errorMsg) errorMsg.innerText = 'Por favor ingresa un código.';
-    return;
-  }
- cerrarModal();
-window.location.href = "vela-alegria.html?codigo=" + codigo.toUpperCase();
+    const input = document.getElementById('input-codigo');
+    const errorMsg = document.getElementById('error-msg');
+    if (!input) return;
+
+    const codigo = input.value.trim().toLowerCase();
+    if (!codigo) {
+        if (errorMsg) errorMsg.innerText = 'Por favor ingresa un código.';
+        return;
+    }
+
+    const rutas = {
+        'alegria': 'vela-alegria.html?codigo=ALEGRIA',
+        'gratitud': 'vela-alegria.html?codigo=gratitud',
+        'calma': 'vela-alegria.html?codigo=calma',
+        'amorpropio': 'vela-alegria.html?codigo=amorpropio'
+    };
+
+    cerrarModal();
+
+    if (rutas[codigo]) {
+        window.location.href = rutas[codigo];
+    } else {
+        window.location.href = "vela-alegria.html?codigo=" + codigo.toUpperCase();
+    }
 }
 
   // Base de datos de las experiencias de cada vela
