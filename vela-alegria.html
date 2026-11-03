@@ -476,9 +476,9 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
   </div>
 
   <script>
-const PINS_VALIDOS = ["ALEGRIA2026", "CALMA2026", "GRATITUD2026", "AMORPROPIO2026", "EMORIA123", "SOL", "ALEGRIA"];
+    const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
 
-function validarPin() {
+    function validarPin() {
     const pinInput = document.getElementById("pin-input");
     const errorMsg = document.getElementById("error-msg");
 
@@ -487,7 +487,6 @@ function validarPin() {
 
     if (PINS_VALIDOS.includes(pin)) {
         localStorage.setItem("acceso_vela_alegria", "concedido");
-        localStorage.setItem("emoria_activado", "true");
         mostrarReproductor();
     } else {
         if (errorMsg) errorMsg.style.display = "block";
@@ -514,11 +513,6 @@ function mostrarReproductor() {
     }
 }
 
-if (window.location.search.includes("codigo=") || localStorage.getItem("acceso_vela_alegria") === "concedido" || localStorage.getItem("emoria_activado") === "true") {
-    localStorage.setItem("acceso_vela_alegria", "concedido");
-    localStorage.setItem("emoria_activado", "true");
-    setTimeout(mostrarReproductor, 50);
-}
     document.addEventListener("DOMContentLoaded", () => {
       const audio = document.getElementById("audio-player");
 
@@ -717,37 +711,19 @@ var playlistData = {
 };
 
 // === LECTOR DE CÓDIGO DINÁMICO DE LA URL ===
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-window.addEventListener('DOMContentLoaded', async function() {
+window.addEventListener('DOMContentLoaded', function() {
     var urlParams = new URLSearchParams(window.location.search);
     var codigoUrl = urlParams.get('codigo');
-    var emocionUrl = urlParams.get('emocion');
-    var estaActivado = localStorage.getItem('emoria_activado') === 'true';
 
-    var claveFinal = (emocionUrl || codigoUrl || "ALEGRIA").toUpperCase().trim();
+    var claveMap = {
+        "ALEGRIA2026": "ALEGRIA",
+        "CALMA2026": "CALMA",
+        "GRATITUD2026": "GRATITUD",
+        "AMORPROPIO2026": "AMORPROPIO"
+    };
 
-    if (typeof supabase === 'undefined' && typeof SUPABASE_URL !== 'undefined') {
-        window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    }
-
-    if (estaActivado || codigoUrl) {
-        if (typeof mostrarReproductor === 'function') {
-            mostrarReproductor();
-        }
-    } else if (codigoUrl && typeof supabase !== 'undefined') {
-        const { data, error } = await supabase
-            .from('activaciones')
-            .select('*')
-            .eq('codigo_activacion', codigoUrl.toUpperCase())
-            .single();
-
-        if (data && !data.usado && typeof mostrarReproductor === 'function') {
-            localStorage.setItem('emoria_activado', 'true');
-            mostrarReproductor();
-        }
-    }
-
+    var codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
+    var claveFinal = claveMap[codigoLimpio] || codigoLimpio;
     var elGlow = document.getElementById('ambient-glow');
     if (elGlow && claveFinal) {
         var colorClass = 'glow-' + claveFinal.toLowerCase();
@@ -766,41 +742,39 @@ window.addEventListener('DOMContentLoaded', async function() {
         document.body.classList.add('theme-alegria');
     }
 
-    if (typeof playlistData !== 'undefined') {
-        var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
+    var datos = playlistData[claveFinal] || playlistData["ALEGRIA"];
 
-        if (datos) {
-            var badge = document.querySelector('.tag-badge');
-            if (badge) badge.innerText = "VELA " + datos.titulo;
+    if (datos) {
+        var badge = document.querySelector('.tag-badge');
+        if (badge) badge.innerText = " VELA " + datos.titulo;
 
-            var subtitulo = document.querySelector('.subtitle');
-            if (subtitulo) subtitulo.innerText = datos.subtitulo;
+        var subtitulo = document.querySelector('.subtitle');
+        if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-            var elIntencion = document.getElementById('affirmation-text');
-            if (elIntencion && datos.intencion) {
-                elIntencion.innerText = `"${datos.intencion}"`;
-            }
+       var elIntencion = document.getElementById('affirmation-text');
+        if (elIntencion && datos.intencion) {
+            elIntencion.innerText = `"${datos.intencion}"`;
+        }
 
-            var videoElement = document.getElementById('video-vela');
-            if (videoElement) {
-                videoElement.muted = true;
-                videoElement.setAttribute('playsinline', '');
+        var videoElement = document.getElementById('video-vela');
+        if (videoElement) {
+            videoElement.muted = true;
+            videoElement.setAttribute('playsinline', '');
 
-                var videoSource = videoElement.querySelector('source') || videoElement;
-                videoSource.src = datos.videoUrl;
+            var videoSource = videoElement.querySelector('source') || videoElement;
+            videoSource.src = datos.videoUrl;
 
-                videoElement.load();
-                videoElement.play().catch(function(e) {
-                    console.log("Autoplay restringido:", e);
-                });
-            }
+            videoElement.load();
+            videoElement.play().catch(function(e) {
+                console.log("Autoplay restringido por navegador:", e);
+            });
+        }
 
-            var audioElement = document.getElementById('audio-experiencia');
-            if (audioElement && datos.audioUrl) {
-                var audioSource = audioElement.querySelector('source') || audioElement;
-                audioSource.src = datos.audioUrl;
-                audioElement.load();
-            }
+        var audioElement = document.getElementById('audio-experiencia');
+        if (audioElement && datos.audioUrl) {
+            var audioSource = audioElement.querySelector('source') || audioElement;
+            audioSource.src = datos.audioUrl;
+            audioElement.load();
         }
     }
 });

@@ -975,22 +975,6 @@ const playlistData = {
         }
     }
 };
-var emocionSeleccionada = 'ALEGRIA';
-
-function pedirCodigo(emocion) {
-    emocionSeleccionada = emocion || 'ALEGRIA';
-    var modal = document.getElementById('modal-codigo');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
-}
-
-function cerrarModal() {
-    var modal = document.getElementById('modal-codigo');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
 
 function obtenerDeviceId() {
     let deviceId = localStorage.getItem('emoria_device_id');
@@ -1000,50 +984,27 @@ function obtenerDeviceId() {
     }
     return deviceId;
 }
-async function validarCodigoModal() {
-    var input = document.getElementById('input-codigo');
-    if (!input) return;
+function validarCodigoModal() {
+    var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
 
-    var codigoLimpio = input.value.trim().toUpperCase();
-    if (!codigoLimpio) {
-        alert("Por favor ingresa un código.");
-        return;
-    }
-
-    var mapaVelas = {
-        'ALEGRIA2026': 'vela-alegria.html',
-        'CALMA2026': 'vela-calma.html',
-        'GRATITUD2026': 'vela-gratitud.html',
-        'AMORPROPIO2026': 'vela-amorpropio.html'
+    var claveMap = {
+        "ALEGRIA2026": "ALEGRIA",
+        "CALMA2026": "CALMA",
+        "GRATITUD2026": "GRATITUD",
+        "AMORPROPIO2026": "AMORPROPIO"
     };
 
-    if (typeof supabase !== 'undefined' && typeof supabase.from === 'function') {
-        try {
-            const { data, error } = await supabase
-                .from('activaciones')
-                .select('*')
-                .eq('codigo_activacion', codigoLimpio)
-                .single();
+    var claveFinal = claveMap[codigoInput] || codigoInput;
 
-            if (error || !data) {
-                var errorMsg = document.getElementById('error-msg');
-                if (errorMsg) errorMsg.innerText = "Código incorrecto o no existe.";
-                return;
-            }
+    await activarProducto(codigoInput);
 
-            if (data.usado) {
-                var errorMsg = document.getElementById('error-msg');
-                if (errorMsg) errorMsg.innerText = "Este código ya fue utilizado.";
-                return;
-            }
-        } catch (e) {
-            console.warn("Supabase no listo, procediendo localmente:", e);
-        }
+    if (localStorage.getItem('emoria_activado') === 'true') {
+        cerrarModal();
+        window.location.href = "vela-alegria.html?codigo=" + claveFinal;
+    } else {
+        var errorMsg = document.getElementById('error-msg');
+        if (errorMsg) errorMsg.innerText = "Código incorrecto o ya usado en otro dispositivo.";
     }
-
-    var destino = mapaVelas[codigoLimpio] || `vela-alegria.html?emocion=${emocionSeleccionada}&codigo=${codigoLimpio}`;
-    cerrarModal();
-    window.location.href = destino;
 }
 
 </script>
