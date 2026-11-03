@@ -476,9 +476,9 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
   </div>
 
   <script>
-    const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
+const PINS_VALIDOS = ["ALEGRIA2026", "CALMA2026", "GRATITUD2026", "AMORPROPIO2026", "EMORIA123", "SOL", "ALEGRIA"];
 
-    function validarPin() {
+function validarPin() {
     const pinInput = document.getElementById("pin-input");
     const errorMsg = document.getElementById("error-msg");
 
@@ -487,6 +487,7 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
 
     if (PINS_VALIDOS.includes(pin)) {
         localStorage.setItem("acceso_vela_alegria", "concedido");
+        localStorage.setItem("emoria_activado", "true");
         mostrarReproductor();
     } else {
         if (errorMsg) errorMsg.style.display = "block";
@@ -513,6 +514,11 @@ function mostrarReproductor() {
     }
 }
 
+if (window.location.search.includes("codigo=") || localStorage.getItem("acceso_vela_alegria") === "concedido" || localStorage.getItem("emoria_activado") === "true") {
+    localStorage.setItem("acceso_vela_alegria", "concedido");
+    localStorage.setItem("emoria_activado", "true");
+    setTimeout(mostrarReproductor, 50);
+}
     document.addEventListener("DOMContentLoaded", () => {
       const audio = document.getElementById("audio-player");
 
