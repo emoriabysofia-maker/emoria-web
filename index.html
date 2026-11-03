@@ -917,7 +917,7 @@ document.addEventListener('DOMContentLoaded', aplicarTemaSegunURL);
     document.getElementById('modal-codigo').classList.remove('active');
     document.getElementById('modal-codigo').style.display = 'none';
   }
-async function validarCodigoModal() {
+function validarCodigoModal() {
   const input = document.getElementById('input-codigo');
   const errorMsg = document.getElementById('error-msg');
   if (!input) return;
@@ -926,9 +926,8 @@ async function validarCodigoModal() {
     if (errorMsg) errorMsg.innerText = 'Por favor ingresa un código.';
     return;
   }
-  if (errorMsg) errorMsg.innerText = 'Verificando...';
-  await activarProducto(codigo);
-  if (localStorage.getItem('emoria_activado') === 'true') { cerrarModal(); window.location.href = "vela-alegria.html?codigo=" + codigo; }
+ cerrarModal();
+window.location.href = "vela-alegria.html?codigo=" + codigo.toUpperCase();
 }
 
   // Base de datos de las experiencias de cada vela
