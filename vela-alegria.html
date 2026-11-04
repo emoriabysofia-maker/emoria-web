@@ -11,15 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+
     :root {
       --emoria-green-dark: #050f0c;
       --emoria-green-base: #0b1d16;
       --emoria-card-bg: #141716;
       --emoria-gold: #e5c158;
       --emoria-gold-dark: #b89530;
-      --emoria-text-light: #f4f4f0;
-      --emoria-text-muted: #8e9994;
+      --emoria-text-light: #ffffff;
+      --emoria-text-muted: #d1ded8;
     }
+
 /* TEMAS SEGÚN LA EMOCIÓN */
   body.theme-alegria {
     --emoria-green-dark: #121003;
@@ -41,8 +43,8 @@
     --emoria-green-dark: #070e03;
     --emoria-green-base: #112108;
     --emoria-card-bg: #121a0d;
-    --emoria-gold: #3c6b15;
-    --emoria-gold-dark: #2a4c0e;
+    --emoria-gold: #7ed957;
+    --emoria-gold-dark: #5cb836;
   }
 
   body.theme-amorpropio {
@@ -367,6 +369,21 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
     position: relative !important;
     z-index: 10 !important;
 }
+.btn-icon {
+    color: #ffffff !important;
+    opacity: 0.95;
+  }
+  
+  .btn-icon:hover {
+    color: var(--emoria-gold) !important;
+    opacity: 1;
+  }
+
+  .tag-badge {
+    color: var(--emoria-gold) !important;
+    border-color: var(--emoria-gold) !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+  }
 
   </style>
 </head>
