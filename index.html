@@ -483,7 +483,7 @@
   const SUPABASE_KEY = 'sb_publishable_TAERLVN8NiTlRrQ3xszp1g_ihuVwgNZ';
   
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  
+
   // Obtener o generar un ID único de este dispositivo/navegador
   function getDeviceId() {
     let devId = localStorage.getItem('emoria_device_id');
@@ -998,28 +998,6 @@ function obtenerDeviceId() {
         localStorage.setItem('emoria_device_id', deviceId);
     }
     return deviceId;
-}
-async function validarCodigoModal() {
-    var codigoInput = document.getElementById('input-codigo').value.trim().toUpperCase();
-
-    var claveMap = {
-        "ALEGRIA2026": "ALEGRIA",
-        "CALMA2026": "CALMA",
-        "GRATITUD2026": "GRATITUD",
-        "AMORPROPIO2026": "AMORPROPIO"
-    };
-
-    var claveFinal = claveMap[codigoInput] || codigoInput;
-
-    await activarProducto(codigoInput);
-
-    if (localStorage.getItem('emoria_activado') === 'true') {
-        cerrarModal();
-        window.location.href = "vela-alegria.html?codigo=" + claveFinal;
-    } else {
-        var errorMsg = document.getElementById('error-msg');
-        if (errorMsg) errorMsg.innerText = "Código incorrecto o ya usado en otro dispositivo.";
-    }
 }
 
 </script>

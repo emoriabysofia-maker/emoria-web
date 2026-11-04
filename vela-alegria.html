@@ -715,6 +715,11 @@ window.addEventListener('DOMContentLoaded', function() {
     var urlParams = new URLSearchParams(window.location.search);
     var codigoUrl = urlParams.get('codigo');
 
+    // SI LA URL TIENE CÓDIGO, MOSTRAR REPRODUCTOR DIRECTAMENTE
+    if (codigoUrl) {
+        mostrarReproductor();
+    }
+
     var claveMap = {
         "ALEGRIA2026": "ALEGRIA",
         "CALMA2026": "CALMA",
@@ -751,7 +756,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var subtitulo = document.querySelector('.subtitle');
         if (subtitulo) subtitulo.innerText = datos.subtitulo;
 
-       var elIntencion = document.getElementById('affirmation-text');
+        var elIntencion = document.getElementById('affirmation-text');
         if (elIntencion && datos.intencion) {
             elIntencion.innerText = `"${datos.intencion}"`;
         }
