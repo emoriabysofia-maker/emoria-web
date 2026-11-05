@@ -495,16 +495,16 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
   <script>
     const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
 
-    function validarPin() {
+   function validarPin() {
     const pinInput = document.getElementById("pin-input");
     const errorMsg = document.getElementById("error-msg");
 
     if (!pinInput) return;
     const pin = pinInput.value.trim().toUpperCase();
 
-    if (PINS_VALIDOS.includes(pin)) {
+    if (PINS_VALIDOS.includes(pin) || playlistData[pin]) {
         localStorage.setItem("acceso_vela_alegria", "concedido");
-        mostrarReproductor();
+        mostrarReproductor(pin);
     } else {
         if (errorMsg) errorMsg.style.display = "block";
     }
