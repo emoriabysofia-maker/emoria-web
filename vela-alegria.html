@@ -528,6 +528,21 @@ function mostrarReproductor() {
         videoVela.muted = true;
         videoVela.play().catch(e => console.log("Info reproduccion video:", e));
     }
+    
+   const audio = document.getElementById("audio-player");
+    if (audio) {
+        const temaActual = playlistData["ALEGRIA"];
+        if (temaActual && temaActual.tracks && temaActual.tracks.length > 0) {
+            let currentTrackIndex = 0;
+            audio.src = temaActual.tracks[currentTrackIndex];
+
+            audio.onended = function() {
+                currentTrackIndex = (currentTrackIndex + 1) % temaActual.tracks.length;
+                audio.src = temaActual.tracks[currentTrackIndex];
+                audio.play();
+            };
+        }
+    }
 }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -702,28 +717,37 @@ var playlistData = {
         subtitulo: "Energía vibrante y positividad para tu día.",
         intencion: "Hoy elijo conectar con la luz, la gratitud y la energía expansiva que habita en mí.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
-        audioUrl: "https://ejemplo.com/audios/alegria.mp3"
+        tracks: [
+            "https://res.cloudinary.com/zm4sg6kz/video/upload/musica-velas/alegria/fuego_nuevo_en_mi_hogar.mp3"
+        ]
     },
     "CALMA": {
         titulo: "CALMA",
         subtitulo: "Paz interior, serenidad y relajación profunda.",
         intencion: "Inhalo paz, exhalo tensión. Este momento es solo mío y de mi serenidad.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
-        audioUrl: "https://ejemplo.com/audios/calma.mp3"
+        tracks: [
+            "https://res.cloudinary.com/zm4sg6kz/video/upload/musica-velas/calma/el_rio_en_silencio.mp3"
+        ]
     },
     "GRATITUD": {
         titulo: "GRATITUD",
         subtitulo: "Conexión, calidez y apreciación del presente.",
         intencion: "Agradezco el presente, reconozco mi camino y honro cada paso dado.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
-        audioUrl: "https://ejemplo.com/audios/gratitud.mp3"
+        tracks: [
+            "https://res.cloudinary.com/zm4sg6kz/video/upload/musica-velas/gratitud/honro_cada_paso.mp3",
+            "https://res.cloudinary.com/zm4sg6kz/video/upload/musica-velas/gratitud/A_Longer_Exhale.mp3"
+        ]
     },
     "AMORPROPIO": {
         titulo: "AMOR PROPIO",
         subtitulo: "Abrazo cálido, autoestima y empoderamiento.",
         intencion: "Me reconozco, me valoro y me habito con ternura y compasión.",
         videoUrl: "https://res.cloudinary.com/zm4sg6kz/video/upload/v1791210411/loopvela.mp4",
-        audioUrl: "https://ejemplo.com/audios/amorpropio.mp3"
+        tracks: [
+            "https://res.cloudinary.com/zm4sg6kz/video/upload/musica-velas/amorpropio/amor_desde_el_centro.mp3"
+        ]
     }
 };
 
