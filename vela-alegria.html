@@ -531,25 +531,19 @@ function mostrarReproductor() {
 
     const audio = document.getElementById("audio-player");
     if (audio) {
-        // Detecta el codigo de la URL o usa ALEGRIA por defecto
+        // Lee la URL para saber qué vela se abrió (ej: ?codigo=ALEGRIA o ?vela=ALEGRIA)
         const urlParams = new URLSearchParams(window.location.search);
-        const codigoUrl = urlParams.get('codigo');
-        const claveMap = {
-            "ALEGRIA2026": "ALEGRIA",
-            "CALMA2026": "CALMA",
-            "GRATITUD2026": "GRATITUD",
-            "AMORPROPIO2026": "AMORPROPIO"
-        };
-        const codigoLimpio = codigoUrl ? codigoUrl.toUpperCase().trim() : "ALEGRIA";
-        const claveFinal = claveMap[codigoLimpio] || codigoLimpio;
-        const temaActual = playlistData[claveFinal] || playlistData["ALEGRIA"];
+        const codigoUrl = (urlParams.get('codigo') || urlParams.get('vela') || 'ALEGRIA').toUpperCase().trim();
+        
+        // Busca directamente en tu playlistData usando tus claves reales
+        const temaActual = playlistData[codigoUrl] || playlistData["ALEGRIA"];
 
         if (temaActual && temaActual.tracks && temaActual.tracks.length > 0) {
             let currentTrackIndex = 0;
             audio.src = temaActual.tracks[currentTrackIndex];
             
-            // Intenta reproducir de inmediato
-            audio.play().catch(e => console.log("Autoplay bloqueado por el navegador:", e));
+            // Intenta reproducir
+            audio.play().catch(e => console.log("Navegador requirió interacción para audio:", e));
 
             audio.onended = function() {
                 currentTrackIndex = (currentTrackIndex + 1) % temaActual.tracks.length;
