@@ -493,7 +493,7 @@ body, body.theme-alegria, body.theme-calma, body.theme-gratitud, body.theme-amor
   </div>
 
   <script>
-    const PINS_VALIDOS = ["ALEGRIA2026", "EMORIA123", "SOL", "ALEGRIA"];
+    const PINS_VALIDOS = ["ALEGRIA2026", "CALMA2026", "GRATITUD2026", "AMORPROPIO2026", "ALEGRIA", "CALMA", "GRATITUD", "AMORPROPIO"];
 
    function validarPin() {
     const pinInput = document.getElementById("pin-input");
@@ -536,6 +536,10 @@ function mostrarReproductor(codigoActivo) {
         const codigoLimpio = rawCode.toString().toUpperCase().trim();
 
         const mapaPines = {
+            "ALEGRIA2026": "ALEGRIA",
+            "CALMA2026": "CALMA",
+            "GRATITUD2026": "GRATITUD",
+            "AMORPROPIO2026": "AMORPROPIO",
             "ALEGRIA": "ALEGRIA",
             "CALMA": "CALMA",
             "GRATITUD": "GRATITUD",
@@ -781,7 +785,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // SI LA URL TIENE CÓDIGO, MOSTRAR REPRODUCTOR DIRECTAMENTE
     if (codigoUrl) {
-        mostrarReproductor();
+        mostrarReproductor(codigoUrl);
     }
 
     var claveMap = {
