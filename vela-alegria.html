@@ -622,14 +622,28 @@ function mostrarReproductor(codigoActivo) {
     }
 });
 
+let currentTrackIndex = 0;
+
 function prevAudio() {
-  const audio = document.getElementById("audio-player");
-  if (audio) audio.currentTime = 0;
+    const audio = document.getElementById("audio-player");
+    if (!audio || !currentMood || !playlistData[currentMood]) return;
+    
+    const tracks = playlistData[currentMood].tracks;
+    currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    
+    audio.src = tracks[currentTrackIndex];
+    audio.play().catch(e => console.log("Error de audio:", e));
 }
 
 function nextAudio() {
-  const audio = document.getElementById("audio-player");
-  if (audio) audio.currentTime = 0;
+    const audio = document.getElementById("audio-player");
+    if (!audio || !currentMood || !playlistData[currentMood]) return;
+    
+    const tracks = playlistData[currentMood].tracks;
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    
+    audio.src = tracks[currentTrackIndex];
+    audio.play().catch(e => console.log("Error de audio:", e));
 }
     function resetAudio() {
       const audio = document.getElementById("audio-player");
