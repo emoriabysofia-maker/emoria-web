@@ -624,9 +624,23 @@ function mostrarReproductor(codigoActivo) {
 
 let currentTrackIndex = 0;
 
+function getActiveMood() {
+    if (typeof currentMood !== "undefined" && playlistData[currentMood]) {
+        return currentMood;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const codigo = params.get("codigo") || "";
+    for (const key in playlistData) {
+       if (codigo.toUpperCase().includes(key) || key.includes(codigo.toUpperCase())) {
+            return key;
+        }
+    }
+    return Object.keys(playlistData)[0];
+}
+
 function prevAudio() {
     const audio = document.getElementById("audio-player");
-    const activeMood = (typeof currentMood !== "undefined") ? currentMood : "AMORPROPIO";
+    const activeMood = getActiveMood();
     if (!audio || !playlistData || !playlistData[activeMood]) return;
     
     const tracks = playlistData[activeMood].tracks;
@@ -638,7 +652,7 @@ function prevAudio() {
 
 function nextAudio() {
     const audio = document.getElementById("audio-player");
-    const activeMood = (typeof currentMood !== "undefined") ? currentMood : "AMORPROPIO";
+    const activeMood = getActiveMood();
     if (!audio || !playlistData || !playlistData[activeMood]) return;
     
     const tracks = playlistData[activeMood].tracks;
