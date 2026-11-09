@@ -608,6 +608,20 @@ function mostrarReproductor(codigoActivo) {
         if (btn) btn.textContent = "▶";
       }
     }
+    document.addEventListener("DOMContentLoaded", () => {
+    const audioEl = document.getElementById("audio-player");
+    const btnEl = document.getElementById("play-btn");
+
+    if (audioEl && btnEl) {
+        audioEl.addEventListener("play", () => {
+            btnEl.textContent = "❚❚";
+        });
+        audioEl.addEventListener("pause", () => {
+            btnEl.textContent = "▶";
+        });
+    }
+});
+
 function prevAudio() {
   const audio = document.getElementById("audio-player");
   if (audio) audio.currentTime = 0;
