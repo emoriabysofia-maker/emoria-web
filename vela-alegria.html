@@ -626,9 +626,10 @@ let currentTrackIndex = 0;
 
 function prevAudio() {
     const audio = document.getElementById("audio-player");
-    if (!audio || !currentMood || !playlistData[currentMood]) return;
+    const activeMood = (typeof currentMood !== "undefined") ? currentMood : "AMORPROPIO";
+    if (!audio || !playlistData || !playlistData[activeMood]) return;
     
-    const tracks = playlistData[currentMood].tracks;
+    const tracks = playlistData[activeMood].tracks;
     currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
     
     audio.src = tracks[currentTrackIndex];
@@ -637,9 +638,10 @@ function prevAudio() {
 
 function nextAudio() {
     const audio = document.getElementById("audio-player");
-    if (!audio || !currentMood || !playlistData[currentMood]) return;
+    const activeMood = (typeof currentMood !== "undefined") ? currentMood : "AMORPROPIO";
+    if (!audio || !playlistData || !playlistData[activeMood]) return;
     
-    const tracks = playlistData[currentMood].tracks;
+    const tracks = playlistData[activeMood].tracks;
     currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
     
     audio.src = tracks[currentTrackIndex];
