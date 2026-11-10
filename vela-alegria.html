@@ -646,7 +646,6 @@ function toggleShuffle() {
         btn.style.opacity = isShuffle ? "1" : "0.5";
     }
 }
-
 function prevAudio() {
     const audio = document.getElementById("audio-player");
     const activeMood = getActiveMood();
@@ -655,15 +654,9 @@ function prevAudio() {
     const tracks = playlistData[activeMood].tracks;
     currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
     
-   if (isShuffle && tracks.length > 1) {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * tracks.length);
-        } while (newIndex === currentTrackIndex);
-        currentTrackIndex = newIndex;
-    } else {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-    }
+    audio.src = tracks[currentTrackIndex];
+    audio.play().catch(e => console.log("Error de audio:", e));
+}
 
 function nextAudio() {
     const audio = document.getElementById("audio-player");
