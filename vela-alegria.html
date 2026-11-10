@@ -637,6 +637,15 @@ function getActiveMood() {
     }
     return Object.keys(playlistData)[0];
 }
+let isShuffle = false;
+
+function toggleShuffle() {
+    isShuffle = !isShuffle;
+    const btn = document.getElementById("btn-shuffle");
+    if (btn) {
+        btn.style.opacity = isShuffle ? "1" : "0.5";
+    }
+}
 
 function prevAudio() {
     const audio = document.getElementById("audio-player");
@@ -646,9 +655,15 @@ function prevAudio() {
     const tracks = playlistData[activeMood].tracks;
     currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
     
-    audio.src = tracks[currentTrackIndex];
-    audio.play().catch(e => console.log("Error de audio:", e));
-}
+   if (isShuffle && tracks.length > 1) {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * tracks.length);
+        } while (newIndex === currentTrackIndex);
+        currentTrackIndex = newIndex;
+    } else {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    }
 
 function nextAudio() {
     const audio = document.getElementById("audio-player");
